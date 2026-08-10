@@ -508,7 +508,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
       email: 'naman03mgs@gmail.com',
       displayName: 'Naman Pandey (Admin)',
       role: 'admin',
-      university: 'Zenith School Of AI',
+      university: 'Engineering Institute',
       major: 'Artificial Intelligence & Engineering',
       stream: 'Artificial Intelligence & Engineering',
       contactDetails: '+91 9876543210',

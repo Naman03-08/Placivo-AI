@@ -87,7 +87,7 @@ export const FounderDetailsPage: React.FC<FounderDetailsPageProps> = ({
             <motion.a
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              href="https://www.linkedin.com/in/naman03mgs"
+              href="https://www.linkedin.com/in/naman-pandey-73802539a?utm_source=share_via&utm_content=profile&utm_medium=member_android"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-blue-50 hover:bg-blue-100 text-blue-700 font-bold text-xs transition-colors border border-blue-200/60"
@@ -170,7 +170,7 @@ export const FounderDetailsPage: React.FC<FounderDetailsPageProps> = ({
                 </p>
                 <p className="text-xs text-slate-600 font-bold flex items-center justify-center gap-1 pt-1">
                   <GraduationCap className="w-3.5 h-3.5 text-slate-500" />
-                  Zenith School of AI / Academic Innovator
+                  Academic Innovator
                 </p>
               </div>
 
@@ -179,7 +179,7 @@ export const FounderDetailsPage: React.FC<FounderDetailsPageProps> = ({
                 <motion.a
                   whileHover={{ scale: 1.15, y: -2 }}
                   whileTap={{ scale: 0.9 }}
-                  href="https://www.linkedin.com/in/naman03mgs"
+                  href="https://www.linkedin.com/in/naman-pandey-73802539a?utm_source=share_via&utm_content=profile&utm_medium=member_android"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="p-2.5 rounded-xl bg-blue-50 text-blue-700 hover:text-white hover:bg-blue-600 border border-blue-200 transition-all shadow-sm"
@@ -201,7 +201,7 @@ export const FounderDetailsPage: React.FC<FounderDetailsPageProps> = ({
                 <motion.a
                   whileHover={{ scale: 1.15, y: -2 }}
                   whileTap={{ scale: 0.9 }}
-                  href="mailto:naman03mgs@gmail.com"
+                  href="mailto:naman08mgs@gmail.com"
                   className="p-2.5 rounded-xl bg-purple-50 text-purple-700 hover:text-white hover:bg-purple-600 border border-purple-200 transition-all shadow-sm"
                   title="Email Naman"
                 >
@@ -608,7 +608,7 @@ export const FounderDetailsPage: React.FC<FounderDetailsPageProps> = ({
                 {/* LinkedIn */}
                 <motion.a
                   whileHover={{ y: -4, scale: 1.02 }}
-                  href="https://www.linkedin.com/in/naman03mgs"
+                  href="https://www.linkedin.com/in/naman-pandey-73802539a?utm_source=share_via&utm_content=profile&utm_medium=member_android"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="p-6 rounded-2xl bg-gradient-to-br from-sky-50 to-blue-50/60 border border-sky-200 hover:border-blue-400 transition-all group space-y-3 shadow-2xs"
@@ -621,7 +621,7 @@ export const FounderDetailsPage: React.FC<FounderDetailsPageProps> = ({
                       <span>LinkedIn</span>
                       <ExternalLink className="w-3.5 h-3.5 text-slate-400 group-hover:text-blue-600 transition-colors" />
                     </h4>
-                    <p className="text-xs text-blue-700 font-bold">in/naman03mgs</p>
+                    <p className="text-xs text-blue-700 font-bold">in/naman-pandey</p>
                     <p className="text-[11px] text-slate-500 font-medium">Connect for career advice, mentorship, and updates.</p>
                   </div>
                 </motion.a>
@@ -650,7 +650,7 @@ export const FounderDetailsPage: React.FC<FounderDetailsPageProps> = ({
                 {/* Email */}
                 <motion.a
                   whileHover={{ y: -4, scale: 1.02 }}
-                  href="mailto:naman03mgs@gmail.com"
+                  href="mailto:naman08mgs@gmail.com"
                   className="p-6 rounded-2xl bg-gradient-to-br from-purple-50 to-pink-50/60 border border-purple-200 hover:border-purple-400 transition-all group space-y-3 shadow-2xs"
                 >
                   <div className="w-10 h-10 rounded-xl bg-purple-600 text-white flex items-center justify-center font-bold shadow-sm">
@@ -661,7 +661,7 @@ export const FounderDetailsPage: React.FC<FounderDetailsPageProps> = ({
                       <span>Email</span>
                       <ExternalLink className="w-3.5 h-3.5 text-slate-400 group-hover:text-purple-600 transition-colors" />
                     </h4>
-                    <p className="text-xs text-purple-700 font-bold">naman03mgs@gmail.com</p>
+                    <p className="text-xs text-purple-700 font-bold">naman08mgs@gmail.com</p>
                     <p className="text-[11px] text-slate-500 font-medium">Send direct inquiries, feedback, or collaboration proposals.</p>
                   </div>
                 </motion.a>
@@ -706,7 +706,7 @@ export const FounderDetailsPage: React.FC<FounderDetailsPageProps> = ({
               <motion.a
                 whileHover={{ scale: 1.06 }}
                 whileTap={{ scale: 0.95 }}
-                href="https://www.linkedin.com/in/naman03mgs"
+                href="https://www.linkedin.com/in/naman-pandey-73802539a?utm_source=share_via&utm_content=profile&utm_medium=member_android"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="px-6 py-3.5 rounded-2xl bg-blue-700/80 hover:bg-blue-800 text-white font-bold text-sm border border-blue-300/50 transition-all inline-flex items-center gap-2"

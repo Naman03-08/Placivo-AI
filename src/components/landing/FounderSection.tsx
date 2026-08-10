@@ -205,7 +205,7 @@ export const FounderSection: React.FC<FounderSectionProps> = ({ onOpenFounderDet
                       <motion.a 
                         whileHover={{ scale: 1.15, y: -2 }}
                         whileTap={{ scale: 0.9 }}
-                        href="https://www.linkedin.com/in/naman03mgs" 
+                        href="https://www.linkedin.com/in/naman-pandey-73802539a?utm_source=share_via&utm_content=profile&utm_medium=member_android" 
                         target="_blank" 
                         rel="noopener noreferrer"
                         className="p-2.5 rounded-xl bg-blue-50 text-blue-700 hover:text-white hover:bg-blue-600 border border-blue-200 transition-all shadow-sm"
@@ -227,7 +227,7 @@ export const FounderSection: React.FC<FounderSectionProps> = ({ onOpenFounderDet
                       <motion.a 
                         whileHover={{ scale: 1.15, y: -2 }}
                         whileTap={{ scale: 0.9 }}
-                        href="mailto:naman03mgs@gmail.com"
+                        href="mailto:naman08mgs@gmail.com"
                         className="p-2.5 rounded-xl bg-purple-50 text-purple-700 hover:text-white hover:bg-purple-600 border border-purple-200 transition-all shadow-sm"
                         title="Email Naman"
                       >

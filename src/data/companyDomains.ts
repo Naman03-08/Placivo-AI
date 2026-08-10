@@ -692,8 +692,6 @@ export const COMPANY_DOMAINS: Record<string, string> = {
   "bits pilani pilani": "bits-pilani.ac.in",
   "bits pilani hyderabad": "bits-hyderabad.ac.in",
   "bits pilani goa": "bits-goa.ac.in",
-  "zenith school of ai": "zenith.ai", // Mock support for display
-  "zenith school": "zenith.ai",
 
   // --- BRAND NAMES & SAVED COLLEGES ---
   "mcdonald's": "mcdonalds.com",
