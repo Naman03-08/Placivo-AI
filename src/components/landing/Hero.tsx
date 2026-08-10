@@ -17,7 +17,7 @@ import {
 } from 'lucide-react';
 import heroStudentsArt from '../../assets/images/campusos_blue_hoodies_art_1785350059169.jpg';
 import placivoAILogo from './placivoAI.png';
-import aiLogoImg from '../../assets/AILogo.jpeg';
+import aiLogoImg from '../../assets/AILogo.svg';
 import { ProfessionalWorkspaceScene } from './ProfessionalWorkspaceScene';
 
 interface HeroProps {
