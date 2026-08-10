@@ -17,6 +17,7 @@ import { Testimonials } from './components/landing/Testimonials';
 import { WhyChooseUs } from './components/landing/WhyChooseUs';
 import { FAQ } from './components/landing/FAQ';
 import { AIGEOSection } from './components/landing/AIGEOSection';
+import { FounderSection } from './components/landing/FounderSection';
 import { FooterLanding } from './components/landing/FooterLanding';
 import { SEOHead } from './components/common/SEOHead';
 
@@ -664,6 +665,7 @@ export function App() {
             <Testimonials />
             <WhyChooseUs onOpenAuth={() => handleOpenAuth('register')} />
             <AIGEOSection />
+            <FounderSection />
             <FAQ />
           </main>
 
