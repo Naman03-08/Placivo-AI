@@ -18,6 +18,7 @@ import { WhyChooseUs } from './components/landing/WhyChooseUs';
 import { FAQ } from './components/landing/FAQ';
 import { AIGEOSection } from './components/landing/AIGEOSection';
 import { FounderSection } from './components/landing/FounderSection';
+import { FounderDetailsPage } from './components/landing/FounderDetailsPage';
 import { FooterLanding } from './components/landing/FooterLanding';
 import { SEOHead } from './components/common/SEOHead';
 
@@ -64,6 +65,7 @@ export function App() {
   const [authMode, setAuthMode] = useState<'login' | 'register'>('login');
   const [showTermsModal, setShowTermsModal] = useState<boolean>(false);
   const [termsTab, setTermsTab] = useState<'terms' | 'privacy' | 'cancellation'>('terms');
+  const [showFounderDetailsPage, setShowFounderDetailsPage] = useState<boolean>(false);
 
   const handleOpenTerms = (tab: 'terms' | 'privacy' | 'cancellation' = 'terms') => {
     setTermsTab(tab);
@@ -642,35 +644,44 @@ export function App() {
 
       <SEOHead activeTab={isLoggedIn ? activeTab : 'landing'} />
 
-      {/* VIEWMODE 1: LANDING PAGE (If not logged in) */}
-      {!isLoggedIn ? (
-        <div className="relative z-10 flex flex-col min-h-screen">
-          <Navbar
-            onNavigateLandingSection={scrollToLandingSection}
-            onOpenAuth={handleOpenAuth}
-            onLaunchApp={() => setIsLoggedIn(true)}
-            isLoggedIn={isLoggedIn}
-          />
-
-          <main className="flex-1">
-            <Hero
-              onOpenAuth={() => handleOpenAuth('register')}
-              onExploreDemo={() => scrollToLandingSection('demo')}
+      {/* VIEWMODE: FOUNDER DETAILS PAGE OVERLAY / LANDING PAGE / WORKSPACE */}
+      {showFounderDetailsPage ? (
+        <FounderDetailsPage 
+          onBack={() => setShowFounderDetailsPage(false)} 
+          onOpenAuth={handleOpenAuth} 
+          onLaunchApp={() => {
+            setIsLoggedIn(true);
+            setShowFounderDetailsPage(false);
+          }} 
+        />
+      ) : !isLoggedIn ? (
+          <div className="relative z-10 flex flex-col min-h-screen">
+            <Navbar
+              onNavigateLandingSection={scrollToLandingSection}
+              onOpenAuth={handleOpenAuth}
+              onLaunchApp={() => setIsLoggedIn(true)}
+              isLoggedIn={isLoggedIn}
             />
-            <TrustedBy />
-            <FeaturesGrid />
-            <AgentSandboxesCarousel onOpenAuth={() => handleOpenAuth('register')} />
-            <InteractiveDemo />
-            <PlacementTimeline />
-            <Testimonials />
-            <WhyChooseUs onOpenAuth={() => handleOpenAuth('register')} />
-            <AIGEOSection />
-            <FounderSection />
-            <FAQ />
-          </main>
 
-          <FooterLanding onOpenTerms={handleOpenTerms} />
-        </div>
+            <main className="flex-1">
+              <Hero
+                onOpenAuth={() => handleOpenAuth('register')}
+                onExploreDemo={() => scrollToLandingSection('demo')}
+              />
+              <TrustedBy />
+              <FeaturesGrid />
+              <AgentSandboxesCarousel onOpenAuth={() => handleOpenAuth('register')} />
+              <InteractiveDemo />
+              <PlacementTimeline />
+              <Testimonials />
+              <WhyChooseUs onOpenAuth={() => handleOpenAuth('register')} />
+              <AIGEOSection />
+              <FounderSection onOpenFounderDetails={() => setShowFounderDetailsPage(true)} />
+              <FAQ />
+            </main>
+
+            <FooterLanding onOpenTerms={handleOpenTerms} />
+          </div>
       ) : (
         /* VIEWMODE 2: APP WORKSPACE PORTAL (If logged in) */
         <div className="relative z-10 h-screen w-full max-w-full overflow-hidden flex flex-col">

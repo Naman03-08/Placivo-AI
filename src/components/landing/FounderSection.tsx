@@ -12,10 +12,15 @@ import {
   ArrowRight, 
   MessageSquare, 
   Send, 
-  CheckCircle2 
+  CheckCircle2,
+  UserCheck
 } from 'lucide-react';
 
-export const FounderSection: React.FC = () => {
+interface FounderSectionProps {
+  onOpenFounderDetails?: () => void;
+}
+
+export const FounderSection: React.FC<FounderSectionProps> = ({ onOpenFounderDetails }) => {
   const [askText, setAskText] = useState('');
   const [replies, setReplies] = useState<{ q: string; a: string }[]>([]);
   const [isTyping, setIsTyping] = useState(false);
@@ -72,6 +77,19 @@ export const FounderSection: React.FC = () => {
           <p className="text-sm sm:text-base text-slate-600 font-medium max-w-2xl mx-auto leading-relaxed pt-2">
             A vision to unify and elevate student learning, coding, and career placements into a single seamless academic experience.
           </p>
+
+          {onOpenFounderDetails && (
+            <div className="pt-4 flex justify-center">
+              <button
+                onClick={onOpenFounderDetails}
+                className="inline-flex items-center gap-2.5 px-6 py-3 rounded-2xl bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs sm:text-sm shadow-lg hover:shadow-xl hover:scale-[1.02] active:scale-95 transition-all cursor-pointer group border border-slate-800"
+              >
+                <UserCheck className="w-4 h-4 text-blue-400 group-hover:rotate-12 transition-transform" />
+                <span>Know Full Details About Founder</span>
+                <ArrowRight className="w-4 h-4 text-slate-400 group-hover:translate-x-1 transition-transform" />
+              </button>
+            </div>
+          )}
         </div>
 
         {/* Founder Bio Block */}
@@ -289,6 +307,19 @@ export const FounderSection: React.FC = () => {
           </div>
 
         </div>
+
+        {onOpenFounderDetails && (
+          <div className="text-center pt-2">
+            <button
+              onClick={onOpenFounderDetails}
+              className="inline-flex items-center gap-3 px-8 py-4 rounded-2xl bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 text-white font-black text-sm sm:text-base shadow-xl hover:shadow-2xl hover:scale-105 active:scale-95 transition-all cursor-pointer border border-slate-700/80 group"
+            >
+              <UserCheck className="w-5 h-5 text-blue-400 group-hover:rotate-12 transition-transform" />
+              <span>Know Full Details About Founder</span>
+              <ArrowRight className="w-5 h-5 text-slate-300 group-hover:translate-x-1 transition-transform" />
+            </button>
+          </div>
+        )}
       </div>
     </section>
   );
