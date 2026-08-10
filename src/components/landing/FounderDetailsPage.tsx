@@ -138,14 +138,14 @@ export const FounderDetailsPage: React.FC<FounderDetailsPageProps> = ({
                     opacity: [0.3, 0.6, 0.3]
                   }}
                   transition={{ repeat: Infinity, duration: 3.5, ease: "easeInOut" }}
-                  className="absolute -inset-2 rounded-3xl bg-gradient-to-r from-sky-400 via-indigo-300 to-purple-400 blur-lg"
+                  className="absolute -inset-2 rounded-full bg-gradient-to-r from-sky-400 via-indigo-300 to-purple-400 blur-lg"
                 />
                 
-                <div className="relative w-52 h-52 sm:w-64 sm:h-64 aspect-square rounded-2xl bg-gradient-to-b from-sky-100 via-slate-50 to-indigo-100 border-4 border-sky-300 flex items-center justify-center overflow-hidden shadow-2xl p-1">
+                <div className="relative w-56 h-56 sm:w-64 sm:h-64 aspect-square rounded-full bg-gradient-to-b from-sky-100 via-slate-50 to-indigo-100 border-4 border-sky-300 flex items-center justify-center overflow-hidden shadow-2xl p-1.5">
                   <img 
                     src={namanImg} 
                     alt="Naman Pandey - Founder" 
-                    className="w-full h-full object-cover object-top rounded-xl group-hover:scale-105 transition-transform duration-500 shadow-xs"
+                    className="w-full h-full object-cover object-top rounded-full group-hover:scale-105 transition-transform duration-500 shadow-sm"
                   />
                 </div>
 

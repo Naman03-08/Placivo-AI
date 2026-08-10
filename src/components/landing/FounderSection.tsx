@@ -175,19 +175,19 @@ export const FounderSection: React.FC<FounderSectionProps> = ({ onOpenFounderDet
                   <motion.div 
                     animate={{ scale: [1, 1.05, 1], rotate: 360 }}
                     transition={{ scale: { repeat: Infinity, duration: 3, ease: "easeInOut" }, rotate: { repeat: Infinity, duration: 30, ease: "linear" } }}
-                    className="absolute inset-2 rounded-2xl border-2 border-dashed border-indigo-300/60 pointer-events-none"
+                    className="absolute inset-2 rounded-full border-2 border-dashed border-indigo-300/60 pointer-events-none"
                   />
                   
                   <div className="z-10 text-center space-y-4 w-full">
-                    {/* Founder Photo Frame (Square Frame) */}
+                    {/* Founder Photo Frame (Circular Frame) */}
                     <motion.div 
-                      whileHover={{ scale: 1.02 }}
-                      className="w-full max-w-[260px] sm:max-w-[280px] aspect-square mx-auto rounded-2xl bg-white border-4 border-sky-300/90 shadow-xl overflow-hidden relative cursor-pointer flex items-center justify-center p-1"
+                      whileHover={{ scale: 1.03 }}
+                      className="w-56 h-56 sm:w-64 sm:h-64 aspect-square mx-auto rounded-full bg-gradient-to-b from-sky-50 via-white to-indigo-50 border-4 border-sky-300/90 shadow-2xl overflow-hidden relative cursor-pointer flex items-center justify-center p-1.5"
                     >
                       <img 
                         src={namanImg} 
                         alt="Naman Pandey - Founder & Chief Architect" 
-                        className="w-full h-full object-cover object-top rounded-xl group-hover:scale-105 transition-transform duration-500 shadow-xs"
+                        className="w-full h-full object-cover object-top rounded-full group-hover:scale-105 transition-transform duration-500 shadow-sm"
                       />
                     </motion.div>
                     
