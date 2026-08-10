@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'motion/react';
+import namanImg from './Naman.png';
 import { 
   Linkedin, 
   Github, 
@@ -160,34 +161,37 @@ export const FounderSection: React.FC<FounderSectionProps> = ({ onOpenFounderDet
                   <span>375 DSA Creator</span>
                 </motion.div>
 
-                {/* Light Gradient Styled Avatar Block */}
-                <div className="aspect-square rounded-2xl bg-gradient-to-tr from-sky-100 via-indigo-50/80 to-purple-100 border border-indigo-100 flex flex-col items-center justify-center p-8 relative overflow-hidden group-hover:scale-[1.01] transition-transform duration-500">
+                {/* Light Gradient Styled Avatar & Photo Block */}
+                <div className="rounded-2xl bg-gradient-to-tr from-sky-100 via-indigo-50/80 to-purple-100 border border-indigo-100 flex flex-col items-center justify-center p-5 relative overflow-hidden group-hover:scale-[1.01] transition-transform duration-500 shadow-inner">
                   
                   {/* Subtle moving grid background */}
                   <motion.div 
                     animate={{ backgroundPosition: ['0px 0px', '40px 40px'] }}
                     transition={{ repeat: Infinity, duration: 20, ease: "linear" }}
-                    className="absolute inset-0 bg-[linear-gradient(to_right,#cbd5e1_1px,transparent_1px),linear-gradient(to_bottom,#cbd5e1_1px,transparent_1px)] bg-[size:24px_24px] opacity-30" 
+                    className="absolute inset-0 bg-[linear-gradient(to_right,#cbd5e1_1px,transparent_1px),gradient(to_bottom,#cbd5e1_1px,transparent_1px)] bg-[size:24px_24px] opacity-30" 
                   />
 
-                  {/* Pulsing Central Ring */}
+                  {/* Pulsing Central Ring Accent */}
                   <motion.div 
-                    animate={{ scale: [1, 1.08, 1], rotate: 360 }}
+                    animate={{ scale: [1, 1.05, 1], rotate: 360 }}
                     transition={{ scale: { repeat: Infinity, duration: 3, ease: "easeInOut" }, rotate: { repeat: Infinity, duration: 30, ease: "linear" } }}
-                    className="absolute w-40 h-40 rounded-full border-2 border-dashed border-indigo-300 pointer-events-none"
+                    className="absolute inset-2 rounded-2xl border-2 border-dashed border-indigo-300/60 pointer-events-none"
                   />
                   
-                  <div className="z-10 text-center space-y-4">
+                  <div className="z-10 text-center space-y-4 w-full">
+                    {/* Founder Photo Frame */}
                     <motion.div 
-                      whileHover={{ scale: 1.1, rotate: 5 }}
-                      className="w-28 h-28 rounded-full bg-white border-4 border-sky-300 mx-auto flex items-center justify-center shadow-lg overflow-hidden relative cursor-pointer"
+                      whileHover={{ scale: 1.02 }}
+                      className="w-full max-w-[280px] sm:max-w-[320px] aspect-[4/5] mx-auto rounded-2xl bg-white border-4 border-sky-300/90 shadow-xl overflow-hidden relative cursor-pointer flex items-center justify-center"
                     >
-                      <span className="text-4xl font-black tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600">
-                        NP
-                      </span>
+                      <img 
+                        src={namanImg} 
+                        alt="Naman Pandey - Founder & Chief Architect" 
+                        className="w-full h-full object-contain object-center group-hover:scale-105 transition-transform duration-500 drop-shadow-md"
+                      />
                     </motion.div>
                     
-                    <div className="space-y-1">
+                    <div className="space-y-1 pt-1">
                       <h3 className="text-2xl font-black text-slate-900 tracking-tight" style={{ fontFamily: "'Playfair Display', serif" }}>
                         Naman Pandey
                       </h3>
@@ -201,7 +205,7 @@ export const FounderSection: React.FC<FounderSectionProps> = ({ onOpenFounderDet
                     </p>
                     
                     {/* Social Quick Links */}
-                    <div className="flex items-center justify-center gap-3 pt-2">
+                    <div className="flex items-center justify-center gap-3 pt-1">
                       <motion.a 
                         whileHover={{ scale: 1.15, y: -2 }}
                         whileTap={{ scale: 0.9 }}
@@ -333,8 +337,8 @@ export const FounderSection: React.FC<FounderSectionProps> = ({ onOpenFounderDet
                   "As student software engineers, the barrier is rarely intellectual capability—it's execution and focus. Placivo AI acts as your tireless co-pilot, handling the tedious task of organization, preparation, and planning, so you can focus entirely on creating incredible technology."
                 </p>
                 <div className="flex items-center gap-3 pt-1">
-                  <div className="w-9 h-9 rounded-full bg-blue-600 text-white font-black text-xs flex items-center justify-center shadow-md border-2 border-white">
-                    NP
+                  <div className="w-10 h-10 rounded-full bg-blue-600 text-white font-black text-xs flex items-center justify-center shadow-md border-2 border-white overflow-hidden shrink-0">
+                    <img src={namanImg} alt="Naman Pandey" className="w-full h-full object-cover object-top" />
                   </div>
                   <div>
                     <p className="text-xs font-bold text-slate-900">Naman Pandey</p>

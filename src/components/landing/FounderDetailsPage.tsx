@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
+import namanImg from './Naman.png';
 import { 
   ArrowLeft, 
   Linkedin, 
@@ -133,17 +134,19 @@ export const FounderDetailsPage: React.FC<FounderDetailsPageProps> = ({
               <div className="relative group mb-4">
                 <motion.div 
                   animate={{ 
-                    scale: [1, 1.05, 1],
+                    scale: [1, 1.04, 1],
                     opacity: [0.3, 0.6, 0.3]
                   }}
                   transition={{ repeat: Infinity, duration: 3.5, ease: "easeInOut" }}
-                  className="absolute -inset-2 rounded-full bg-gradient-to-r from-sky-400 via-indigo-300 to-purple-400 blur-lg"
+                  className="absolute -inset-2 rounded-3xl bg-gradient-to-r from-sky-400 via-indigo-300 to-purple-400 blur-lg"
                 />
                 
-                <div className="relative w-36 h-36 sm:w-44 sm:h-44 rounded-full bg-white border-4 border-sky-200 flex items-center justify-center overflow-hidden shadow-xl">
-                  <span className="text-5xl font-black text-transparent bg-clip-text bg-gradient-to-tr from-blue-600 via-indigo-600 to-purple-600">
-                    NP
-                  </span>
+                <div className="relative w-48 h-60 sm:w-56 sm:h-72 rounded-2xl bg-gradient-to-b from-sky-100 via-slate-50 to-indigo-100 border-4 border-sky-300 flex items-center justify-center overflow-hidden shadow-2xl">
+                  <img 
+                    src={namanImg} 
+                    alt="Naman Pandey - Founder" 
+                    className="w-full h-full object-contain object-center group-hover:scale-105 transition-transform duration-500 drop-shadow-md"
+                  />
                 </div>
 
                 {/* Floating Badge */}
