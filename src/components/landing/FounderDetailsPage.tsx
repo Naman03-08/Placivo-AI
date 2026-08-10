@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { motion } from 'motion/react';
 import { 
   ArrowLeft, 
   Linkedin, 
@@ -11,18 +10,18 @@ import {
   BookOpen, 
   Cpu, 
   CheckCircle2, 
-  Send, 
   UserCheck, 
   Target, 
   Zap, 
   Flame, 
   Globe, 
-  Bot, 
   FileText, 
   Layers, 
   Rocket, 
   Quote,
-  GraduationCap
+  GraduationCap,
+  MessageCircle,
+  ExternalLink
 } from 'lucide-react';
 
 interface FounderDetailsPageProps {
@@ -37,65 +36,24 @@ export const FounderDetailsPage: React.FC<FounderDetailsPageProps> = ({
   onLaunchApp 
 }) => {
   const [activeTab, setActiveTab] = useState<'journey' | 'tech' | 'modules' | 'contact'>('journey');
-  const [askText, setAskText] = useState('');
-  const [replies, setReplies] = useState<{ q: string; a: string; time: string }[]>([
-    {
-      q: "What inspired you to build Placivo AI?",
-      a: "As an engineering student, I observed how scattered college preparation was—students kept 15 different tabs open for DSA, resume formatting, attendance tracking, and study notes. I created Placivo AI to synthesize all of these into one intelligent, unified workspace.",
-      time: "Just now"
-    }
-  ]);
-  const [isTyping, setIsTyping] = useState(false);
-
-  const handleAskFounder = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!askText.trim()) return;
-
-    const query = askText.trim();
-    setAskText('');
-    setIsTyping(true);
-
-    let response = "Thank you for asking! I'm passionate about building tech that truly simplifies student lives. Feel free to connect with me directly on LinkedIn or via email at naman03mgs@gmail.com!";
-    const lowerQuery = query.toLowerCase();
-
-    if (lowerQuery.includes('vision') || lowerQuery.includes('why') || lowerQuery.includes('goal') || lowerQuery.includes('future')) {
-      response = "My vision for Placivo AI is to make elite technical career preparation completely accessible to every student worldwide, regardless of their college tier or background.";
-    } else if (lowerQuery.includes('stack') || lowerQuery.includes('build') || lowerQuery.includes('tech') || lowerQuery.includes('how')) {
-      response = "Placivo AI is built with React 18, TypeScript, Tailwind CSS, Google Gemini 1.5/2.0 API models, and Firebase Firestore for persistent cloud data synchronization.";
-    } else if (lowerQuery.includes('dsa') || lowerQuery.includes('sheet') || lowerQuery.includes('coding')) {
-      response = "Our 375 DSA Sheet is mathematically structured across core topics (Arrays, Trees, Graphs, DP). Each problem includes instant AI hint generation to help you learn without getting stuck.";
-    } else if (lowerQuery.includes('resume') || lowerQuery.includes('ats')) {
-      response = "Our ATS Resume Builder tests your resume against real tech industry recruiter keywords and gives actionable suggestions to maximize your interview callback rate.";
-    } else if (lowerQuery.includes('contact') || lowerQuery.includes('email') || lowerQuery.includes('linkedin')) {
-      response = "You can reach out to me directly on LinkedIn (in/naman03mgs) or send an email to naman03mgs@gmail.com!";
-    }
-
-    setTimeout(() => {
-      setReplies(prev => [
-        ...prev, 
-        { q: query, a: response, time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) }
-      ]);
-      setIsTyping(false);
-    }, 1000);
-  };
 
   return (
-    <div className="min-h-screen bg-slate-50 text-slate-900 font-sans relative selection:bg-purple-600 selection:text-white">
+    <div className="min-h-screen bg-slate-50/70 text-slate-900 font-sans relative selection:bg-blue-600 selection:text-white">
       {/* Top Header Bar */}
-      <header className="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-slate-200/80 px-4 sm:px-8 py-3.5 shadow-xs">
+      <header className="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-slate-200/80 px-4 sm:px-8 py-3.5 shadow-2xs">
         <div className="max-w-7xl mx-auto flex items-center justify-between gap-4">
           <button
             onClick={onBack}
-            className="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold text-xs transition-colors cursor-pointer group"
+            className="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold text-xs transition-colors cursor-pointer group border border-slate-200"
           >
             <ArrowLeft className="w-4 h-4 text-slate-600 group-hover:-translate-x-1 transition-transform" />
             <span>Back to Main Page</span>
           </button>
 
           <div className="flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+            <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse" />
             <span className="text-xs font-black uppercase tracking-wider text-slate-700 hidden sm:inline">
-              Founder Profile & Vision
+              Founder Profile & Details
             </span>
           </div>
 
@@ -104,7 +62,7 @@ export const FounderDetailsPage: React.FC<FounderDetailsPageProps> = ({
               href="https://www.linkedin.com/in/naman03mgs"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-blue-50 hover:bg-blue-100 text-blue-700 font-bold text-xs transition-colors"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-blue-50 hover:bg-blue-100 text-blue-700 font-bold text-xs transition-colors border border-blue-200/60"
             >
               <Linkedin className="w-3.5 h-3.5" />
               <span className="hidden sm:inline">LinkedIn</span>
@@ -112,9 +70,9 @@ export const FounderDetailsPage: React.FC<FounderDetailsPageProps> = ({
             {onLaunchApp && (
               <button
                 onClick={onLaunchApp}
-                className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs shadow-sm transition-all cursor-pointer"
+                className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs shadow-sm transition-all cursor-pointer"
               >
-                <Rocket className="w-3.5 h-3.5 text-blue-400" />
+                <Rocket className="w-3.5 h-3.5 text-blue-100" />
                 <span>Launch App</span>
               </button>
             )}
@@ -123,38 +81,38 @@ export const FounderDetailsPage: React.FC<FounderDetailsPageProps> = ({
       </header>
 
       {/* Main Container */}
-      <main className="max-w-6xl mx-auto px-4 sm:px-8 py-10 sm:py-16 space-y-12">
+      <main className="max-w-6xl mx-auto px-4 sm:px-8 py-8 sm:py-12 space-y-10">
         
-        {/* Founder Hero Card */}
-        <div className="relative rounded-3xl bg-slate-950 text-white p-6 sm:p-10 lg:p-12 overflow-hidden border border-slate-800 shadow-2xl">
-          {/* Subtle background glow */}
-          <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-br from-blue-600/20 via-purple-600/15 to-transparent rounded-full blur-3xl pointer-events-none" />
-          <div className="absolute bottom-0 left-0 w-80 h-80 bg-slate-800/30 rounded-full blur-2xl pointer-events-none" />
+        {/* Founder Hero Card (Light Theme) */}
+        <div className="relative rounded-3xl bg-white text-slate-900 p-6 sm:p-10 lg:p-12 overflow-hidden border border-slate-200 shadow-xl bg-gradient-to-br from-blue-50/50 via-white to-purple-50/40">
+          {/* Decorative light glows */}
+          <div className="absolute top-0 right-0 w-96 h-96 bg-blue-100/40 rounded-full blur-3xl pointer-events-none" />
+          <div className="absolute bottom-0 left-0 w-80 h-80 bg-purple-100/30 rounded-full blur-3xl pointer-events-none" />
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center relative z-10">
-            {/* Left: Avatar & Quick Badges */}
+            {/* Left: Avatar & Badges */}
             <div className="lg:col-span-4 flex flex-col items-center text-center">
               <div className="relative group mb-4">
-                <div className="absolute -inset-1 rounded-full bg-gradient-to-r from-blue-500 via-purple-500 to-emerald-400 opacity-40 blur-md group-hover:opacity-75 transition duration-500" />
-                <div className="relative w-36 h-36 sm:w-44 sm:h-44 rounded-full bg-slate-900 border-4 border-slate-800 flex items-center justify-center overflow-hidden shadow-2xl">
-                  <span className="text-5xl font-black text-transparent bg-clip-text bg-gradient-to-tr from-blue-400 via-slate-100 to-purple-300">
+                <div className="absolute -inset-1 rounded-full bg-gradient-to-r from-blue-400 via-indigo-300 to-purple-400 opacity-30 blur-md group-hover:opacity-60 transition duration-500" />
+                <div className="relative w-36 h-36 sm:w-44 sm:h-44 rounded-full bg-white border-4 border-blue-100 flex items-center justify-center overflow-hidden shadow-xl">
+                  <span className="text-5xl font-black text-transparent bg-clip-text bg-gradient-to-tr from-blue-600 via-indigo-600 to-purple-600">
                     NP
                   </span>
                 </div>
               </div>
 
               <div className="space-y-1">
-                <div className="inline-flex items-center gap-1.5 text-[11px] font-black uppercase tracking-widest text-emerald-400 bg-emerald-950/80 px-3 py-1 rounded-full border border-emerald-800/60">
-                  <UserCheck className="w-3.5 h-3.5" />
+                <div className="inline-flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-widest text-emerald-700 bg-emerald-50 px-3 py-1 rounded-full border border-emerald-200/80">
+                  <UserCheck className="w-3.5 h-3.5 text-emerald-600" />
                   Verified Founder
                 </div>
-                <h1 className="text-3xl font-black tracking-tight text-white pt-2" style={{ fontFamily: "'Playfair Display', serif" }}>
+                <h1 className="text-3xl font-black tracking-tight text-slate-900 pt-2" style={{ fontFamily: "'Playfair Display', serif" }}>
                   Naman Pandey
                 </h1>
-                <p className="text-xs font-bold text-blue-400 tracking-wider uppercase">
+                <p className="text-xs font-black text-blue-600 tracking-wider uppercase">
                   Founder & Lead System Architect
                 </p>
-                <p className="text-xs text-slate-400 font-medium flex items-center justify-center gap-1 pt-1">
+                <p className="text-xs text-slate-500 font-semibold flex items-center justify-center gap-1 pt-1">
                   <GraduationCap className="w-3.5 h-3.5 text-slate-400" />
                   Zenith School of AI / Academic Innovator
                 </p>
@@ -166,7 +124,7 @@ export const FounderDetailsPage: React.FC<FounderDetailsPageProps> = ({
                   href="https://www.linkedin.com/in/naman03mgs"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="p-2.5 rounded-xl bg-slate-900 hover:bg-blue-600 text-slate-300 hover:text-white border border-slate-800 transition-all shadow-sm"
+                  className="p-2.5 rounded-xl bg-slate-100 hover:bg-blue-600 text-slate-700 hover:text-white border border-slate-200 transition-all shadow-2xs"
                   title="LinkedIn"
                 >
                   <Linkedin className="w-4 h-4" />
@@ -175,14 +133,14 @@ export const FounderDetailsPage: React.FC<FounderDetailsPageProps> = ({
                   href="https://github.com/Naman03-08"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="p-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-300 hover:text-white border border-slate-800 transition-all shadow-sm"
+                  className="p-2.5 rounded-xl bg-slate-100 hover:bg-slate-900 text-slate-700 hover:text-white border border-slate-200 transition-all shadow-2xs"
                   title="GitHub"
                 >
                   <Github className="w-4 h-4" />
                 </a>
                 <a
                   href="mailto:naman03mgs@gmail.com"
-                  className="p-2.5 rounded-xl bg-slate-900 hover:bg-purple-600 text-slate-300 hover:text-white border border-slate-800 transition-all shadow-sm"
+                  className="p-2.5 rounded-xl bg-slate-100 hover:bg-purple-600 text-slate-700 hover:text-white border border-slate-200 transition-all shadow-2xs"
                   title="Email Naman"
                 >
                   <Mail className="w-4 h-4" />
@@ -191,41 +149,41 @@ export const FounderDetailsPage: React.FC<FounderDetailsPageProps> = ({
             </div>
 
             {/* Right: Bio Summary & Vision */}
-            <div className="lg:col-span-8 space-y-6">
+            <div className="lg:col-span-8 space-y-5">
               <div className="space-y-2">
-                <span className="text-xs font-bold uppercase tracking-widest text-purple-400 bg-purple-950/60 px-2.5 py-1 rounded-md border border-purple-800/50">
+                <span className="text-xs font-bold uppercase tracking-widest text-purple-700 bg-purple-50 px-2.5 py-1 rounded-md border border-purple-200/80">
                   Mission Statement
                 </span>
-                <h2 className="text-2xl sm:text-3xl font-bold text-white tracking-tight leading-snug" style={{ fontFamily: "'Playfair Display', serif" }}>
+                <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 tracking-tight leading-snug" style={{ fontFamily: "'Playfair Display', serif" }}>
                   "Reimagining How Students Learn, Code, and Secure Top Software Engineering Careers"
                 </h2>
               </div>
 
-              <p className="text-sm text-slate-300 leading-relaxed font-normal">
+              <p className="text-sm text-slate-600 leading-relaxed font-medium">
                 Placivo AI was created by Naman Pandey out of a firsthand realization: engineering undergraduates spend more time managing chaotic tools, searching for reliable DSA roadmaps, and struggling with ATS resume formatting than actually acquiring skills.
               </p>
 
-              <p className="text-sm text-slate-300 leading-relaxed font-normal">
+              <p className="text-sm text-slate-600 leading-relaxed font-medium">
                 By synthesizing AI-driven document summarization, voice-simulated interviewers, curated 375 DSA problem sets, and habit tracking into a single unified Academic Operating System, Naman is empowering students to build consistency and excel in top-tier campus recruitment.
               </p>
 
               {/* Stat Counters */}
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-4 border-t border-slate-800/80">
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-4 border-t border-slate-200">
                 <div className="space-y-0.5">
-                  <p className="text-2xl font-black text-white">100K+</p>
-                  <p className="text-[11px] text-slate-400 font-medium uppercase tracking-wider">Students Target</p>
+                  <p className="text-2xl font-black text-slate-900">100K+</p>
+                  <p className="text-[11px] text-slate-500 font-bold uppercase tracking-wider">Students Target</p>
                 </div>
                 <div className="space-y-0.5">
-                  <p className="text-2xl font-black text-blue-400">375</p>
-                  <p className="text-[11px] text-slate-400 font-medium uppercase tracking-wider">Curated DSA Problems</p>
+                  <p className="text-2xl font-black text-blue-600">375</p>
+                  <p className="text-[11px] text-slate-500 font-bold uppercase tracking-wider">Curated DSA Problems</p>
                 </div>
                 <div className="space-y-0.5">
-                  <p className="text-2xl font-black text-purple-400">15+</p>
-                  <p className="text-[11px] text-slate-400 font-medium uppercase tracking-wider">Core AI Modules</p>
+                  <p className="text-2xl font-black text-purple-600">15+</p>
+                  <p className="text-[11px] text-slate-500 font-bold uppercase tracking-wider">Core Modules</p>
                 </div>
                 <div className="space-y-0.5">
-                  <p className="text-2xl font-black text-emerald-400">100%</p>
-                  <p className="text-[11px] text-slate-400 font-medium uppercase tracking-wider">Free Access Goal</p>
+                  <p className="text-2xl font-black text-emerald-600">100%</p>
+                  <p className="text-[11px] text-slate-500 font-bold uppercase tracking-wider">Free Access Goal</p>
                 </div>
               </div>
             </div>
@@ -238,8 +196,8 @@ export const FounderDetailsPage: React.FC<FounderDetailsPageProps> = ({
             onClick={() => setActiveTab('journey')}
             className={`inline-flex items-center gap-2 px-4 py-2.5 rounded-xl font-bold text-xs sm:text-sm transition-all cursor-pointer whitespace-nowrap ${
               activeTab === 'journey' 
-                ? 'bg-slate-900 text-white shadow-md' 
-                : 'bg-white text-slate-600 hover:bg-slate-100 border border-slate-200'
+                ? 'bg-blue-600 text-white shadow-md' 
+                : 'bg-white text-slate-700 hover:bg-slate-100 border border-slate-200'
             }`}
           >
             <BookOpen className="w-4 h-4" />
@@ -250,8 +208,8 @@ export const FounderDetailsPage: React.FC<FounderDetailsPageProps> = ({
             onClick={() => setActiveTab('tech')}
             className={`inline-flex items-center gap-2 px-4 py-2.5 rounded-xl font-bold text-xs sm:text-sm transition-all cursor-pointer whitespace-nowrap ${
               activeTab === 'tech' 
-                ? 'bg-slate-900 text-white shadow-md' 
-                : 'bg-white text-slate-600 hover:bg-slate-100 border border-slate-200'
+                ? 'bg-blue-600 text-white shadow-md' 
+                : 'bg-white text-slate-700 hover:bg-slate-100 border border-slate-200'
             }`}
           >
             <Code2 className="w-4 h-4" />
@@ -262,8 +220,8 @@ export const FounderDetailsPage: React.FC<FounderDetailsPageProps> = ({
             onClick={() => setActiveTab('modules')}
             className={`inline-flex items-center gap-2 px-4 py-2.5 rounded-xl font-bold text-xs sm:text-sm transition-all cursor-pointer whitespace-nowrap ${
               activeTab === 'modules' 
-                ? 'bg-slate-900 text-white shadow-md' 
-                : 'bg-white text-slate-600 hover:bg-slate-100 border border-slate-200'
+                ? 'bg-blue-600 text-white shadow-md' 
+                : 'bg-white text-slate-700 hover:bg-slate-100 border border-slate-200'
             }`}
           >
             <Layers className="w-4 h-4" />
@@ -274,12 +232,12 @@ export const FounderDetailsPage: React.FC<FounderDetailsPageProps> = ({
             onClick={() => setActiveTab('contact')}
             className={`inline-flex items-center gap-2 px-4 py-2.5 rounded-xl font-bold text-xs sm:text-sm transition-all cursor-pointer whitespace-nowrap ${
               activeTab === 'contact' 
-                ? 'bg-slate-900 text-white shadow-md' 
-                : 'bg-white text-slate-600 hover:bg-slate-100 border border-slate-200'
+                ? 'bg-blue-600 text-white shadow-md' 
+                : 'bg-white text-slate-700 hover:bg-slate-100 border border-slate-200'
             }`}
           >
-            <Bot className="w-4 h-4" />
-            <span>Ask Naman's Copilot</span>
+            <MessageCircle className="w-4 h-4" />
+            <span>Connect & Contact</span>
           </button>
         </div>
 
@@ -288,7 +246,7 @@ export const FounderDetailsPage: React.FC<FounderDetailsPageProps> = ({
           <div className="space-y-8">
             <div className="bg-white rounded-3xl p-6 sm:p-10 border border-slate-200 shadow-sm space-y-6">
               <div className="space-y-2">
-                <span className="text-xs font-bold uppercase tracking-widest text-blue-600 bg-blue-50 px-2.5 py-1 rounded-md">
+                <span className="text-xs font-bold uppercase tracking-widest text-blue-700 bg-blue-50 px-2.5 py-1 rounded-md border border-blue-100">
                   Background & Motivation
                 </span>
                 <h3 className="text-2xl font-bold text-slate-900" style={{ fontFamily: "'Playfair Display', serif" }}>
@@ -326,7 +284,7 @@ export const FounderDetailsPage: React.FC<FounderDetailsPageProps> = ({
             {/* Core Pillars */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               <div className="p-6 rounded-3xl bg-white border border-slate-200 shadow-xs space-y-3">
-                <div className="w-10 h-10 rounded-2xl bg-blue-50 text-blue-600 flex items-center justify-center">
+                <div className="w-10 h-10 rounded-2xl bg-blue-50 text-blue-600 flex items-center justify-center border border-blue-100">
                   <Target className="w-5 h-5" />
                 </div>
                 <h4 className="text-base font-bold text-slate-900">1. Laser Focus on Placements</h4>
@@ -336,17 +294,17 @@ export const FounderDetailsPage: React.FC<FounderDetailsPageProps> = ({
               </div>
 
               <div className="p-6 rounded-3xl bg-white border border-slate-200 shadow-xs space-y-3">
-                <div className="w-10 h-10 rounded-2xl bg-purple-50 text-purple-600 flex items-center justify-center">
+                <div className="w-10 h-10 rounded-2xl bg-purple-50 text-purple-600 flex items-center justify-center border border-purple-100">
                   <Zap className="w-5 h-5" />
                 </div>
-                <h4 className="text-base font-bold text-slate-900">2. Instantaneous AI Assistance</h4>
+                <h4 className="text-base font-bold text-slate-900">2. Instantaneous Assistance</h4>
                 <p className="text-xs text-slate-600 leading-relaxed font-normal">
                   Powered by Google Gemini models for real-time document dissection, logical proofs, and algorithmic code debugging.
                 </p>
               </div>
 
               <div className="p-6 rounded-3xl bg-white border border-slate-200 shadow-xs space-y-3">
-                <div className="w-10 h-10 rounded-2xl bg-emerald-50 text-emerald-600 flex items-center justify-center">
+                <div className="w-10 h-10 rounded-2xl bg-emerald-50 text-emerald-600 flex items-center justify-center border border-emerald-100">
                   <Flame className="w-5 h-5" />
                 </div>
                 <h4 className="text-base font-bold text-slate-900">3. Habiturex Habit OS</h4>
@@ -362,14 +320,14 @@ export const FounderDetailsPage: React.FC<FounderDetailsPageProps> = ({
         {activeTab === 'tech' && (
           <div className="bg-white rounded-3xl p-6 sm:p-10 border border-slate-200 shadow-sm space-y-8">
             <div className="space-y-2">
-              <span className="text-xs font-bold uppercase tracking-widest text-purple-600 bg-purple-50 px-2.5 py-1 rounded-md">
+              <span className="text-xs font-bold uppercase tracking-widest text-purple-700 bg-purple-50 px-2.5 py-1 rounded-md border border-purple-100">
                 Full-Stack Engineering
               </span>
               <h3 className="text-2xl font-bold text-slate-900" style={{ fontFamily: "'Playfair Display', serif" }}>
                 How Naman Built Placivo AI
               </h3>
               <p className="text-xs sm:text-sm text-slate-600 font-medium">
-                Engineered from the ground up for extreme speed, real-time persistence, and responsive 3D WebGL visuals.
+                Engineered from the ground up for extreme speed, real-time persistence, and responsive visual design.
               </p>
             </div>
 
@@ -379,18 +337,18 @@ export const FounderDetailsPage: React.FC<FounderDetailsPageProps> = ({
                   <Cpu className="w-5 h-5 text-blue-600" />
                   <h4 className="text-sm font-bold text-slate-900">Frontend & Visual Canvas</h4>
                 </div>
-                <ul className="space-y-2 text-xs text-slate-600">
+                <ul className="space-y-2.5 text-xs text-slate-600">
                   <li className="flex items-center gap-2">
                     <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0" />
-                    <span><strong>React 18 + Vite:</strong> Ultra-fast component lifecycle and modern JSX.</span>
+                    <span><strong>React 18 + Vite:</strong> Fast component lifecycle and modular architecture.</span>
                   </li>
                   <li className="flex items-center gap-2">
                     <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0" />
-                    <span><strong>Tailwind CSS v4:</strong> Custom high-contrast layout system with typography scaling.</span>
+                    <span><strong>Tailwind CSS v4:</strong> Custom light theme layout system with fluid typography.</span>
                   </li>
                   <li className="flex items-center gap-2">
                     <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0" />
-                    <span><strong>Motion (framer-motion):</strong> Smooth spring layout physics and modal transitions.</span>
+                    <span><strong>Motion (framer-motion):</strong> Smooth spring layout physics and view transitions.</span>
                   </li>
                 </ul>
               </div>
@@ -398,12 +356,12 @@ export const FounderDetailsPage: React.FC<FounderDetailsPageProps> = ({
               <div className="p-6 rounded-2xl bg-slate-50 border border-slate-200/80 space-y-3">
                 <div className="flex items-center gap-2">
                   <Globe className="w-5 h-5 text-purple-600" />
-                  <h4 className="text-sm font-bold text-slate-900">Backend & AI Integration</h4>
+                  <h4 className="text-sm font-bold text-slate-900">Backend & API Logic</h4>
                 </div>
-                <ul className="space-y-2 text-xs text-slate-600">
+                <ul className="space-y-2.5 text-xs text-slate-600">
                   <li className="flex items-center gap-2">
                     <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0" />
-                    <span><strong>Google Gemini SDK:</strong> Server-proxied AI routes for notes, interview simulations, and resume evaluations.</span>
+                    <span><strong>Google Gemini SDK:</strong> Server-proxied API routes for notes summarization, interview simulations, and resume evaluations.</span>
                   </li>
                   <li className="flex items-center gap-2">
                     <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0" />
@@ -411,7 +369,7 @@ export const FounderDetailsPage: React.FC<FounderDetailsPageProps> = ({
                   </li>
                   <li className="flex items-center gap-2">
                     <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0" />
-                    <span><strong>Web Speech API:</strong> Audio synthesis for real-time AI mock interviewer voice responses.</span>
+                    <span><strong>Web Speech API:</strong> Audio synthesis for real-time voice-interactive interview simulations.</span>
                   </li>
                 </ul>
               </div>
@@ -423,17 +381,7 @@ export const FounderDetailsPage: React.FC<FounderDetailsPageProps> = ({
         {activeTab === 'modules' && (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             <div className="p-6 rounded-3xl bg-white border border-slate-200 shadow-xs space-y-3">
-              <div className="w-9 h-9 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center font-bold">
-                <Bot className="w-5 h-5" />
-              </div>
-              <h4 className="text-base font-bold text-slate-900">Personal AI Assistant</h4>
-              <p className="text-xs text-slate-600 leading-relaxed">
-                Autonomous academic tutor for logical proofs, code synchronization, and syllabus dissection.
-              </p>
-            </div>
-
-            <div className="p-6 rounded-3xl bg-white border border-slate-200 shadow-xs space-y-3">
-              <div className="w-9 h-9 rounded-xl bg-purple-50 text-purple-600 flex items-center justify-center font-bold">
+              <div className="w-9 h-9 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center font-bold border border-blue-100">
                 <Code2 className="w-5 h-5" />
               </div>
               <h4 className="text-base font-bold text-slate-900">375 Curated DSA Sheet</h4>
@@ -443,7 +391,7 @@ export const FounderDetailsPage: React.FC<FounderDetailsPageProps> = ({
             </div>
 
             <div className="p-6 rounded-3xl bg-white border border-slate-200 shadow-xs space-y-3">
-              <div className="w-9 h-9 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center font-bold">
+              <div className="w-9 h-9 rounded-xl bg-purple-50 text-purple-600 flex items-center justify-center font-bold border border-purple-100">
                 <FileText className="w-5 h-5" />
               </div>
               <h4 className="text-base font-bold text-slate-900">ATS Resume Builder</h4>
@@ -453,7 +401,7 @@ export const FounderDetailsPage: React.FC<FounderDetailsPageProps> = ({
             </div>
 
             <div className="p-6 rounded-3xl bg-white border border-slate-200 shadow-xs space-y-3">
-              <div className="w-9 h-9 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center font-bold">
+              <div className="w-9 h-9 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center font-bold border border-amber-100">
                 <Flame className="w-5 h-5" />
               </div>
               <h4 className="text-base font-bold text-slate-900">Habiturex Tracker</h4>
@@ -463,109 +411,135 @@ export const FounderDetailsPage: React.FC<FounderDetailsPageProps> = ({
             </div>
 
             <div className="p-6 rounded-3xl bg-white border border-slate-200 shadow-xs space-y-3">
-              <div className="w-9 h-9 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center font-bold">
+              <div className="w-9 h-9 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center font-bold border border-indigo-100">
                 <Award className="w-5 h-5" />
               </div>
-              <h4 className="text-base font-bold text-slate-900">AI Mock Interviewer</h4>
+              <h4 className="text-base font-bold text-slate-900">Mock Interviewer</h4>
               <p className="text-xs text-slate-600 leading-relaxed">
                 Real-time voice-interactive interview simulator evaluating technical articulation and confidence.
               </p>
             </div>
 
             <div className="p-6 rounded-3xl bg-white border border-slate-200 shadow-xs space-y-3">
-              <div className="w-9 h-9 rounded-xl bg-rose-50 text-rose-600 flex items-center justify-center font-bold">
+              <div className="w-9 h-9 rounded-xl bg-rose-50 text-rose-600 flex items-center justify-center font-bold border border-rose-100">
                 <BookOpen className="w-5 h-5" />
               </div>
-              <h4 className="text-base font-bold text-slate-900">AI Notes Summarizer</h4>
+              <h4 className="text-base font-bold text-slate-900">Academic Notes Summarizer</h4>
               <p className="text-xs text-slate-600 leading-relaxed">
                 Upload dense academic PDFs to generate instant chapter bullet points and exam flashcards.
               </p>
             </div>
+
+            <div className="p-6 rounded-3xl bg-white border border-slate-200 shadow-xs space-y-3">
+              <div className="w-9 h-9 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center font-bold border border-emerald-100">
+                <Sparkles className="w-5 h-5" />
+              </div>
+              <h4 className="text-base font-bold text-slate-900">Academic Command Center</h4>
+              <p className="text-xs text-slate-600 leading-relaxed">
+                Central dashboard providing study schedules, assignment trackers, and real-time attendance alerts.
+              </p>
+            </div>
           </div>
         )}
 
-        {/* Tab 4: Interactive Copilot */}
+        {/* Tab 4: Connect & Direct Contact */}
         {activeTab === 'contact' && (
-          <div className="bg-white rounded-3xl p-6 sm:p-10 border border-slate-200 shadow-sm space-y-6">
-            <div className="space-y-1">
+          <div className="bg-white rounded-3xl p-6 sm:p-10 border border-slate-200 shadow-sm space-y-8">
+            <div className="space-y-2">
+              <span className="text-xs font-bold uppercase tracking-widest text-blue-700 bg-blue-50 px-2.5 py-1 rounded-md border border-blue-100">
+                Direct Contact
+              </span>
               <h3 className="text-2xl font-bold text-slate-900" style={{ fontFamily: "'Playfair Display', serif" }}>
-                Ask Naman's AI Twin
+                Get in Touch with Naman Pandey
               </h3>
-              <p className="text-xs text-slate-500 font-medium">
-                Got questions about Placivo AI, placement strategy, or technical collaboration? Ask below!
+              <p className="text-xs sm:text-sm text-slate-600 font-medium">
+                Whether you want to discuss Placivo AI, explore technical collaborations, or seek career mentorship, feel free to connect directly.
               </p>
             </div>
 
-            {/* Chat Feed */}
-            <div className="space-y-3 max-h-96 overflow-y-auto p-4 rounded-2xl bg-slate-50 border border-slate-200/80 text-xs">
-              {replies.map((r, i) => (
-                <div key={i} className="space-y-2">
-                  <div className="flex justify-end">
-                    <div className="bg-slate-900 text-white px-3 py-2 rounded-xl max-w-[80%] font-medium">
-                      {r.q}
-                    </div>
-                  </div>
-                  <div className="flex justify-start">
-                    <div className="bg-blue-50 text-blue-950 border border-blue-100 px-3.5 py-2.5 rounded-xl max-w-[85%] leading-relaxed font-medium">
-                      <div className="flex items-center justify-between gap-2 mb-1 border-b border-blue-200/50 pb-1">
-                        <span className="font-bold text-[11px] text-blue-700">Naman Pandey (Digital Twin)</span>
-                        <span className="text-[10px] text-blue-400">{r.time}</span>
-                      </div>
-                      {r.a}
-                    </div>
-                  </div>
-                </div>
-              ))}
-              {isTyping && (
-                <div className="flex justify-start">
-                  <div className="bg-slate-200 text-slate-600 px-3 py-1.5 rounded-xl text-xs font-semibold animate-pulse">
-                    Naman is typing response...
-                  </div>
-                </div>
-              )}
-            </div>
-
-            {/* Form */}
-            <form onSubmit={handleAskFounder} className="flex gap-2">
-              <input
-                type="text"
-                value={askText}
-                onChange={(e) => setAskText(e.target.value)}
-                placeholder="Ask about placement advice, tech stack, or vision..."
-                className="flex-1 px-4 py-3 text-xs sm:text-sm rounded-xl border border-slate-200 bg-white focus:outline-none focus:ring-2 focus:ring-slate-900 transition-all font-semibold"
-              />
-              <button
-                type="submit"
-                className="px-5 py-3 rounded-xl bg-slate-900 text-white hover:bg-slate-800 font-bold text-xs transition-colors shrink-0 flex items-center gap-1.5 cursor-pointer"
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {/* LinkedIn */}
+              <a
+                href="https://www.linkedin.com/in/naman03mgs"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="p-6 rounded-2xl bg-slate-50 border border-slate-200 hover:border-blue-300 hover:bg-blue-50/50 transition-all group space-y-3"
               >
-                <span>Send Query</span>
-                <Send className="w-3.5 h-3.5" />
-              </button>
-            </form>
+                <div className="w-10 h-10 rounded-xl bg-blue-100 text-blue-700 flex items-center justify-center font-bold">
+                  <Linkedin className="w-5 h-5" />
+                </div>
+                <div className="space-y-1">
+                  <h4 className="text-sm font-bold text-slate-900 flex items-center justify-between">
+                    <span>LinkedIn</span>
+                    <ExternalLink className="w-3.5 h-3.5 text-slate-400 group-hover:text-blue-600 transition-colors" />
+                  </h4>
+                  <p className="text-xs text-slate-600 font-medium">in/naman03mgs</p>
+                  <p className="text-[11px] text-slate-500">Connect for career advice, mentorship, and updates.</p>
+                </div>
+              </a>
+
+              {/* GitHub */}
+              <a
+                href="https://github.com/Naman03-08"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="p-6 rounded-2xl bg-slate-50 border border-slate-200 hover:border-slate-400 hover:bg-slate-100/60 transition-all group space-y-3"
+              >
+                <div className="w-10 h-10 rounded-xl bg-slate-200 text-slate-800 flex items-center justify-center font-bold">
+                  <Github className="w-5 h-5" />
+                </div>
+                <div className="space-y-1">
+                  <h4 className="text-sm font-bold text-slate-900 flex items-center justify-between">
+                    <span>GitHub</span>
+                    <ExternalLink className="w-3.5 h-3.5 text-slate-400 group-hover:text-slate-800 transition-colors" />
+                  </h4>
+                  <p className="text-xs text-slate-600 font-medium">github.com/Naman03-08</p>
+                  <p className="text-[11px] text-slate-500">Explore open source code repositories and projects.</p>
+                </div>
+              </a>
+
+              {/* Email */}
+              <a
+                href="mailto:naman03mgs@gmail.com"
+                className="p-6 rounded-2xl bg-slate-50 border border-slate-200 hover:border-purple-300 hover:bg-purple-50/50 transition-all group space-y-3"
+              >
+                <div className="w-10 h-10 rounded-xl bg-purple-100 text-purple-700 flex items-center justify-center font-bold">
+                  <Mail className="w-5 h-5" />
+                </div>
+                <div className="space-y-1">
+                  <h4 className="text-sm font-bold text-slate-900 flex items-center justify-between">
+                    <span>Email</span>
+                    <ExternalLink className="w-3.5 h-3.5 text-slate-400 group-hover:text-purple-600 transition-colors" />
+                  </h4>
+                  <p className="text-xs text-slate-600 font-medium">naman03mgs@gmail.com</p>
+                  <p className="text-[11px] text-slate-500">Send direct inquiries, feedback, or collaboration proposals.</p>
+                </div>
+              </a>
+            </div>
           </div>
         )}
 
-        {/* Footer Call to Action Banner */}
-        <div className="rounded-3xl bg-gradient-to-r from-slate-900 via-blue-950 to-slate-900 text-white p-8 sm:p-12 text-center space-y-6 shadow-2xl relative overflow-hidden border border-slate-800">
+        {/* Footer Call to Action Banner (Light Theme) */}
+        <div className="rounded-3xl bg-gradient-to-r from-blue-600 via-indigo-600 to-blue-700 text-white p-8 sm:p-12 text-center space-y-6 shadow-xl relative overflow-hidden border border-blue-500">
           <div className="max-w-2xl mx-auto space-y-3 relative z-10">
             <h3 className="text-2xl sm:text-3xl font-black tracking-tight" style={{ fontFamily: "'Playfair Display', serif" }}>
               Ready to Experience Placivo AI?
             </h3>
-            <p className="text-xs sm:text-sm text-slate-300 font-medium leading-relaxed">
+            <p className="text-xs sm:text-sm text-blue-100 font-medium leading-relaxed">
               Join thousands of engineering students utilizing Naman's Academic Operating System for structured DSA, ATS resume optimization, and high-performance study consistency.
             </p>
             <div className="flex flex-wrap items-center justify-center gap-4 pt-4">
               {onLaunchApp ? (
                 <button
                   onClick={onLaunchApp}
-                  className="px-6 py-3.5 rounded-2xl bg-white text-slate-900 hover:bg-slate-100 font-bold text-sm shadow-lg hover:shadow-xl hover:scale-105 transition-all cursor-pointer"
+                  className="px-6 py-3.5 rounded-2xl bg-white text-blue-700 hover:bg-blue-50 font-bold text-sm shadow-md hover:shadow-lg hover:scale-105 transition-all cursor-pointer"
                 >
                   Launch Workspace Now
                 </button>
               ) : onOpenAuth ? (
                 <button
                   onClick={() => onOpenAuth('register')}
-                  className="px-6 py-3.5 rounded-2xl bg-white text-slate-900 hover:bg-slate-100 font-bold text-sm shadow-lg hover:shadow-xl hover:scale-105 transition-all cursor-pointer"
+                  className="px-6 py-3.5 rounded-2xl bg-white text-blue-700 hover:bg-blue-50 font-bold text-sm shadow-md hover:shadow-lg hover:scale-105 transition-all cursor-pointer"
                 >
                   Create Free Student Account
                 </button>
@@ -574,9 +548,9 @@ export const FounderDetailsPage: React.FC<FounderDetailsPageProps> = ({
                 href="https://www.linkedin.com/in/naman03mgs"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-6 py-3.5 rounded-2xl bg-slate-800 hover:bg-slate-700 text-white font-bold text-sm border border-slate-700 transition-all inline-flex items-center gap-2"
+                className="px-6 py-3.5 rounded-2xl bg-blue-700/80 hover:bg-blue-800 text-white font-bold text-sm border border-blue-400/50 transition-all inline-flex items-center gap-2"
               >
-                <Linkedin className="w-4 h-4 text-blue-400" />
+                <Linkedin className="w-4 h-4 text-blue-200" />
                 <span>Connect with Naman</span>
               </a>
             </div>
