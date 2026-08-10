@@ -179,15 +179,15 @@ export const FounderSection: React.FC<FounderSectionProps> = ({ onOpenFounderDet
                   />
                   
                   <div className="z-10 text-center space-y-4 w-full">
-                    {/* Founder Photo Frame */}
+                    {/* Founder Photo Frame (Square Frame) */}
                     <motion.div 
                       whileHover={{ scale: 1.02 }}
-                      className="w-full max-w-[280px] sm:max-w-[320px] aspect-[4/5] mx-auto rounded-2xl bg-white border-4 border-sky-300/90 shadow-xl overflow-hidden relative cursor-pointer flex items-center justify-center"
+                      className="w-full max-w-[260px] sm:max-w-[280px] aspect-square mx-auto rounded-2xl bg-white border-4 border-sky-300/90 shadow-xl overflow-hidden relative cursor-pointer flex items-center justify-center p-1"
                     >
                       <img 
                         src={namanImg} 
                         alt="Naman Pandey - Founder & Chief Architect" 
-                        className="w-full h-full object-contain object-center group-hover:scale-105 transition-transform duration-500 drop-shadow-md"
+                        className="w-full h-full object-cover object-top rounded-xl group-hover:scale-105 transition-transform duration-500 shadow-xs"
                       />
                     </motion.div>
                     
