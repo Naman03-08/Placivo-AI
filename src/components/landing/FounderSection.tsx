@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'motion/react';
-import namanImg from './Naman.png';
+import namanImg from '../../assets/Naman.jpeg';
 import { 
   Linkedin, 
   Github, 

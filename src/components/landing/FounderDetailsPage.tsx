@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import namanImg from './Naman.png';
+import namanImg from '../../assets/Naman.jpeg';
 import { 
   ArrowLeft, 
   Linkedin, 
