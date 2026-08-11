@@ -15,7 +15,7 @@ import {
   Star,
   Zap 
 } from 'lucide-react';
-import heroStudentsArt from '../../assets/mainimg.png';
+import heroStudentsArt from '../newimg.png';
 import placivoAILogo from './Placivo-logo.png';
 import aiLogoImg from './Placivo-logo.png';
 import { ProfessionalWorkspaceScene } from './ProfessionalWorkspaceScene';
