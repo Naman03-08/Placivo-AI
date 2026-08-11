@@ -15,14 +15,21 @@ import {
   Zap,
   BookOpen,
   Compass,
-  HeartHandshake
+  HeartHandshake,
+  Rocket
 } from 'lucide-react';
 
 interface FounderSectionProps {
   onOpenFounderDetails?: () => void;
+  onLaunchApp?: () => void;
+  onOpenAuth?: (mode?: 'login' | 'register') => void;
 }
 
-export const FounderSection: React.FC<FounderSectionProps> = ({ onOpenFounderDetails }) => {
+export const FounderSection: React.FC<FounderSectionProps> = ({ 
+  onOpenFounderDetails,
+  onLaunchApp,
+  onOpenAuth
+}) => {
   return (
     <section 
       id="founder-section" 
@@ -95,24 +102,41 @@ export const FounderSection: React.FC<FounderSectionProps> = ({ onOpenFounderDet
             Empowering students worldwide by unifying coding, academic preparation, and career growth into one high-performance operating system.
           </p>
 
-          {onOpenFounderDetails && (
+          {(onOpenFounderDetails || onLaunchApp || onOpenAuth) && (
             <motion.div 
               initial={{ opacity: 0, scale: 0.9 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ delay: 0.2 }}
-              className="pt-4 flex justify-center"
+              className="pt-4 flex flex-wrap items-center justify-center gap-3.5"
             >
-              <motion.button
-                whileHover={{ scale: 1.06, y: -2 }}
-                whileTap={{ scale: 0.95 }}
-                onClick={onOpenFounderDetails}
-                className="inline-flex items-center gap-2.5 px-7 py-3.5 rounded-2xl bg-gradient-to-r from-blue-600 via-indigo-600 to-blue-600 text-white font-black text-xs sm:text-sm shadow-xl hover:shadow-2xl hover:shadow-blue-300/50 transition-all cursor-pointer group border border-blue-400"
-              >
-                <UserCheck className="w-4 h-4 text-sky-200 group-hover:rotate-12 transition-transform" />
-                <span>Know Full Details About Founder</span>
-                <ArrowRight className="w-4 h-4 text-sky-200 group-hover:translate-x-1.5 transition-transform" />
-              </motion.button>
+              {onOpenFounderDetails && (
+                <motion.button
+                  whileHover={{ scale: 1.05, y: -2 }}
+                  whileTap={{ scale: 0.95 }}
+                  onClick={onOpenFounderDetails}
+                  className="inline-flex items-center gap-2.5 px-6 py-3 rounded-2xl bg-gradient-to-r from-blue-600 via-indigo-600 to-blue-600 text-white font-black text-xs sm:text-sm shadow-xl hover:shadow-2xl hover:shadow-blue-300/50 transition-all cursor-pointer group border border-blue-400"
+                >
+                  <UserCheck className="w-4 h-4 text-sky-200 group-hover:rotate-12 transition-transform" />
+                  <span>Know Full Details About Founder</span>
+                  <ArrowRight className="w-4 h-4 text-sky-200 group-hover:translate-x-1.5 transition-transform" />
+                </motion.button>
+              )}
+              {(onLaunchApp || onOpenAuth) && (
+                <motion.button
+                  whileHover={{ scale: 1.05, y: -2 }}
+                  whileTap={{ scale: 0.95 }}
+                  onClick={() => {
+                    if (onLaunchApp) onLaunchApp();
+                    else if (onOpenAuth) onOpenAuth('login');
+                  }}
+                  className="inline-flex items-center gap-2.5 px-6 py-3 rounded-2xl bg-white text-blue-700 hover:bg-blue-50 font-black text-xs sm:text-sm shadow-md hover:shadow-lg transition-all cursor-pointer border border-blue-200 group"
+                >
+                  <Rocket className="w-4 h-4 text-blue-600 group-hover:rotate-12 transition-transform" />
+                  <span>Launch App</span>
+                  <ArrowRight className="w-4 h-4 text-blue-600 group-hover:translate-x-1.5 transition-transform" />
+                </motion.button>
+              )}
             </motion.div>
           )}
         </motion.div>
@@ -352,23 +376,40 @@ export const FounderSection: React.FC<FounderSectionProps> = ({ onOpenFounderDet
 
         </div>
 
-        {onOpenFounderDetails && (
+        {(onOpenFounderDetails || onLaunchApp || onOpenAuth) && (
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-center pt-2"
+            className="text-center pt-2 flex flex-wrap items-center justify-center gap-4"
           >
-            <motion.button
-              whileHover={{ scale: 1.05, y: -3 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={onOpenFounderDetails}
-              className="inline-flex items-center gap-3 px-9 py-4 rounded-2xl bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 text-white font-black text-sm sm:text-base shadow-xl hover:shadow-2xl hover:shadow-blue-300/60 transition-all cursor-pointer border border-blue-400 group"
-            >
-              <UserCheck className="w-5 h-5 text-sky-200 group-hover:rotate-12 transition-transform" />
-              <span>Know Full Details About Founder</span>
-              <ArrowRight className="w-5 h-5 text-sky-200 group-hover:translate-x-1.5 transition-transform" />
-            </motion.button>
+            {onOpenFounderDetails && (
+              <motion.button
+                whileHover={{ scale: 1.05, y: -3 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={onOpenFounderDetails}
+                className="inline-flex items-center gap-3 px-8 py-3.5 rounded-2xl bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 text-white font-black text-sm sm:text-base shadow-xl hover:shadow-2xl hover:shadow-blue-300/60 transition-all cursor-pointer border border-blue-400 group"
+              >
+                <UserCheck className="w-5 h-5 text-sky-200 group-hover:rotate-12 transition-transform" />
+                <span>Know Full Details About Founder</span>
+                <ArrowRight className="w-5 h-5 text-sky-200 group-hover:translate-x-1.5 transition-transform" />
+              </motion.button>
+            )}
+            {(onLaunchApp || onOpenAuth) && (
+              <motion.button
+                whileHover={{ scale: 1.05, y: -3 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={() => {
+                  if (onLaunchApp) onLaunchApp();
+                  else if (onOpenAuth) onOpenAuth('login');
+                }}
+                className="inline-flex items-center gap-3 px-8 py-3.5 rounded-2xl bg-white text-blue-700 hover:bg-blue-50 font-black text-sm sm:text-base shadow-xl hover:shadow-2xl transition-all cursor-pointer border border-blue-200 group"
+              >
+                <Rocket className="w-5 h-5 text-blue-600 group-hover:rotate-12 transition-transform" />
+                <span>Launch App</span>
+                <ArrowRight className="w-5 h-5 text-blue-600 group-hover:translate-x-1.5 transition-transform" />
+              </motion.button>
+            )}
           </motion.div>
         )}
       </div>

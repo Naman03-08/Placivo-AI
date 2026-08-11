@@ -472,6 +472,7 @@ export function App() {
     StorageService.setIsLoggedIn(true);
     StorageService.saveProfile(newProfile);
     setShowAuthModal(false);
+    setShowFounderDetailsPage(false);
   };
 
   const handleLogout = async () => {
@@ -650,8 +651,11 @@ export function App() {
           onBack={() => setShowFounderDetailsPage(false)} 
           onOpenAuth={handleOpenAuth} 
           onLaunchApp={() => {
-            setIsLoggedIn(true);
-            setShowFounderDetailsPage(false);
+            if (isLoggedIn) {
+              setShowFounderDetailsPage(false);
+            } else {
+              handleOpenAuth('login');
+            }
           }} 
         />
       ) : !isLoggedIn ? (
@@ -659,7 +663,13 @@ export function App() {
             <Navbar
               onNavigateLandingSection={scrollToLandingSection}
               onOpenAuth={handleOpenAuth}
-              onLaunchApp={() => setIsLoggedIn(true)}
+              onLaunchApp={() => {
+                if (isLoggedIn) {
+                  // Workspace
+                } else {
+                  handleOpenAuth('login');
+                }
+              }}
               isLoggedIn={isLoggedIn}
             />
 
@@ -676,7 +686,17 @@ export function App() {
               <Testimonials />
               <WhyChooseUs onOpenAuth={() => handleOpenAuth('register')} />
               <AIGEOSection />
-              <FounderSection onOpenFounderDetails={() => setShowFounderDetailsPage(true)} />
+              <FounderSection 
+                onOpenFounderDetails={() => setShowFounderDetailsPage(true)} 
+                onOpenAuth={handleOpenAuth}
+                onLaunchApp={() => {
+                  if (isLoggedIn) {
+                    setShowFounderDetailsPage(false);
+                  } else {
+                    handleOpenAuth('login');
+                  }
+                }}
+              />
               <FAQ />
             </main>
 
