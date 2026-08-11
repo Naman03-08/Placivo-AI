@@ -15,7 +15,7 @@ import {
   Star,
   Zap 
 } from 'lucide-react';
-import heroStudentsArt from '../../assets/images/campusos_blue_hoodies_art_1785350059169.jpg';
+import heroStudentsArt from '../../assets/mainimg.png';
 import placivoAILogo from './Placivo-logo.png';
 import aiLogoImg from './Placivo-logo.png';
 import { ProfessionalWorkspaceScene } from './ProfessionalWorkspaceScene';
