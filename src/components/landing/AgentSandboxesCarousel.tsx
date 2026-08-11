@@ -393,7 +393,7 @@ export const AgentSandboxesCarousel: React.FC<AgentSandboxesCarouselProps> = ({ 
 
           {/* MAIN ACTIVE CARD (SLIDING MOTION WITH DYNAMIC SPOTLIGHT & 2D TILT) */}
           <div className="w-full max-w-xl z-20 relative">
-            <AnimatePresence custom={direction} mode="popLayout">
+            <AnimatePresence custom={direction} mode="wait">
               <motion.div
                 key={currentModule.id}
                 custom={direction}
