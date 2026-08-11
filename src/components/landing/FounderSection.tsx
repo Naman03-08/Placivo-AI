@@ -182,12 +182,12 @@ export const FounderSection: React.FC<FounderSectionProps> = ({ onOpenFounderDet
                     {/* Founder Photo Frame (Circular Frame) */}
                     <motion.div 
                       whileHover={{ scale: 1.03 }}
-                      className="w-56 h-56 sm:w-64 sm:h-64 aspect-square mx-auto rounded-full bg-gradient-to-b from-sky-50 via-white to-indigo-50 border-4 border-sky-300/90 shadow-2xl overflow-hidden relative cursor-pointer flex items-center justify-center p-1.5"
+                      className="w-56 h-56 sm:w-64 sm:h-64 aspect-square mx-auto rounded-full bg-gradient-to-b from-sky-100 via-white to-indigo-100 border-4 border-sky-300/90 shadow-2xl overflow-hidden relative cursor-pointer flex items-center justify-center p-2"
                     >
                       <img 
                         src={namanImg} 
                         alt="Naman Pandey - Founder & Chief Architect" 
-                        className="w-full h-full object-cover object-top rounded-full group-hover:scale-105 transition-transform duration-500 shadow-sm"
+                        className="w-full h-full object-contain object-center rounded-full group-hover:scale-105 transition-transform duration-500 drop-shadow-sm"
                       />
                     </motion.div>
                     
@@ -337,8 +337,8 @@ export const FounderSection: React.FC<FounderSectionProps> = ({ onOpenFounderDet
                   "As student software engineers, the barrier is rarely intellectual capability—it's execution and focus. Placivo AI acts as your tireless co-pilot, handling the tedious task of organization, preparation, and planning, so you can focus entirely on creating incredible technology."
                 </p>
                 <div className="flex items-center gap-3 pt-1">
-                  <div className="w-10 h-10 rounded-full bg-blue-600 text-white font-black text-xs flex items-center justify-center shadow-md border-2 border-white overflow-hidden shrink-0">
-                    <img src={namanImg} alt="Naman Pandey" className="w-full h-full object-cover object-top" />
+                  <div className="w-10 h-10 rounded-full bg-slate-100 text-white font-black text-xs flex items-center justify-center shadow-md border-2 border-white overflow-hidden shrink-0">
+                    <img src={namanImg} alt="Naman Pandey" className="w-full h-full object-contain object-center" />
                   </div>
                   <div>
                     <p className="text-xs font-bold text-slate-900">Naman Pandey</p>

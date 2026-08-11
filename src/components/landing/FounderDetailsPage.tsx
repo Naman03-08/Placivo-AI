@@ -141,11 +141,11 @@ export const FounderDetailsPage: React.FC<FounderDetailsPageProps> = ({
                   className="absolute -inset-2 rounded-full bg-gradient-to-r from-sky-400 via-indigo-300 to-purple-400 blur-lg"
                 />
                 
-                <div className="relative w-56 h-56 sm:w-64 sm:h-64 aspect-square rounded-full bg-gradient-to-b from-sky-100 via-slate-50 to-indigo-100 border-4 border-sky-300 flex items-center justify-center overflow-hidden shadow-2xl p-1.5">
+                <div className="relative w-56 h-56 sm:w-64 sm:h-64 aspect-square rounded-full bg-gradient-to-b from-sky-100 via-slate-50 to-indigo-100 border-4 border-sky-300 flex items-center justify-center overflow-hidden shadow-2xl p-2">
                   <img 
                     src={namanImg} 
                     alt="Naman Pandey - Founder" 
-                    className="w-full h-full object-cover object-top rounded-full group-hover:scale-105 transition-transform duration-500 shadow-sm"
+                    className="w-full h-full object-contain object-center rounded-full group-hover:scale-105 transition-transform duration-500 drop-shadow-sm"
                   />
                 </div>
 
