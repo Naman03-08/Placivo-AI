@@ -31,7 +31,7 @@ export const FAQ: React.FC = () => {
     },
     {
       q: 'What is the official support contact info for Placivo AI?',
-      a: 'You can reach our official support team via email at placivofficial@gmail.com or call/WhatsApp us at +91 9621783559 for instant query resolution.',
+      a: 'You can reach our official support team via email at placivofficial@gmail.com for instant query resolution.',
     },
   ];
 

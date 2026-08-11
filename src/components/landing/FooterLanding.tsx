@@ -1,5 +1,5 @@
 import React from 'react';
-import { Heart, ShieldCheck, FileText, Lock, RefreshCw, Mail, Phone, Headphones, GraduationCap } from 'lucide-react';
+import { Heart, ShieldCheck, FileText, Lock, RefreshCw, Mail, Headphones, GraduationCap } from 'lucide-react';
 import placivoAILogo from './Placivo-logo.png';
 
 interface FooterLandingProps {
@@ -35,13 +35,6 @@ export const FooterLanding: React.FC<FooterLandingProps> = ({ onOpenTerms }) => 
                 >
                   <Mail className="w-3.5 h-3.5 text-blue-600 shrink-0" />
                   <span className="truncate">placivofficial@gmail.com</span>
-                </a>
-                <a 
-                  href="tel:9621783559" 
-                  className="flex items-center gap-2 text-slate-700 hover:text-emerald-600 font-semibold transition-colors"
-                >
-                  <Phone className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
-                  <span>+91 9621783559</span>
                 </a>
               </div>
             </div>

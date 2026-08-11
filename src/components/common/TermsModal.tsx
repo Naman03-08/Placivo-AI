@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { X, ShieldCheck, FileText, Scale, ExternalLink, CheckCircle, Search, Mail, Phone, Building2, Lock, GraduationCap } from 'lucide-react';
+import { X, ShieldCheck, FileText, Scale, ExternalLink, CheckCircle, Search, Mail, Building2, Lock, GraduationCap } from 'lucide-react';
 import placivoAILogo from '../landing/Placivo-logo.png';
 
 interface TermsModalProps {
@@ -228,7 +228,6 @@ Any dispute arising out of or relating to these Terms or the use of Placivo AI s
       content: `If you have any questions, feedback, or concerns regarding these Terms & Conditions, Privacy Policy, or Subscription Billing, please contact us:
 
 • Official Email: placivofficial@gmail.com
-• Phone / Helpline: +91 9621783559
 • Official Portal: https://placivo.ai
 • Platform: Placivo AI Student Intelligence Services`
     }
@@ -278,7 +277,7 @@ By using Placivo AI, you consent to the data practices described in this policy.
 • Delete your account and associated cloud data at any time upon request.
 • Export or download your created resumes, notes, and certificates.
 
-For privacy requests, email placivofficial@gmail.com or call +91 9621783559.`
+For privacy requests, email placivofficial@gmail.com.`
     }
   ];
 
@@ -286,7 +285,7 @@ For privacy requests, email placivofficial@gmail.com or call +91 9621783559.`
     {
       id: 'cancellation-policy',
       title: '1. Subscription Cancellation Policy',
-      content: `At Placivo AI, you can cancel your paid subscription (such as Pro Scholar or Pro Ultimate) at any time through your Account Settings or by contacting placivofficial@gmail.com or calling +91 9621783559.
+      content: `At Placivo AI, you can cancel your paid subscription (such as Pro Scholar or Pro Ultimate) at any time through your Account Settings or by contacting placivofficial@gmail.com.
 
 Key details regarding subscription cancellation:
 • Instant Processing: When you disable auto-renewal, your account remains active with full premium benefits until the end of your current active billing cycle.
@@ -307,7 +306,7 @@ Key details regarding subscription cancellation:
       title: '3. Duplicate Charge & Payment Reconciliation',
       content: `In the rare event of a technical payment failure, duplicate transaction, or if funds were debited from your account without activating your subscription:
 
-1. Contact Support Immediately: Email placivofficial@gmail.com or call +91 9621783559 with your payment receipt or UPI reference ID.
+1. Contact Support Immediately: Email placivofficial@gmail.com with your payment receipt or UPI reference ID.
 2. Direct Verification: Our financial reconciliation team will verify transaction logs with Razorpay/Stripe payment gateways.
 3. Fast Resolution: Verified duplicate charges will be refunded 100% to your original payment method within 24 to 48 hours.`
     },
@@ -317,7 +316,6 @@ Key details regarding subscription cancellation:
       content: `If you have any questions before purchasing a subscription or need guidance choosing the right plan for your placement preparation:
 
 • Email Support: placivofficial@gmail.com
-• Phone / WhatsApp Helpline: +91 9621783559
 • Official Website: https://placivo.ai`
     }
   ];
@@ -447,13 +445,6 @@ Key details regarding subscription cancellation:
             >
               <Mail className="w-3.5 h-3.5 text-blue-600" />
               Email Us
-            </a>
-            <a
-              href="tel:9621783559"
-              className="px-3 py-1.5 rounded-xl border border-slate-200 bg-white hover:bg-slate-100 text-slate-700 text-xs font-bold transition-all flex items-center gap-1.5"
-            >
-              <Phone className="w-3.5 h-3.5 text-emerald-600" />
-              Call Support
             </a>
             <button
               onClick={onClose}

@@ -166,7 +166,6 @@ export const SEOHead: React.FC<SEOHeadProps> = ({ activeTab = 'landing', customT
         'contactPoint': {
           '@type': 'ContactPoint',
           'email': 'placivofficial@gmail.com',
-          'telephone': '+91 9621783559',
           'contactType': 'customer support',
           'availableLanguage': ['English']
         },
