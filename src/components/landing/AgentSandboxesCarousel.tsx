@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import { motion, AnimatePresence, Variants } from 'motion/react';
 import { 
   FileText, 
@@ -240,7 +240,6 @@ export const AgentSandboxesCarousel: React.FC<AgentSandboxesCarouselProps> = ({ 
   const [direction, setDirection] = useState<number>(1);
   const [mousePos, setMousePos] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
   const [isHovered, setIsHovered] = useState<boolean>(false);
-  const cardRef = useRef<HTMLDivElement>(null);
 
   const handlePrev = () => {
     setDirection(-1);
@@ -259,8 +258,7 @@ export const AgentSandboxesCarousel: React.FC<AgentSandboxesCarouselProps> = ({ 
   };
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!cardRef.current) return;
-    const rect = cardRef.current.getBoundingClientRect();
+    const rect = e.currentTarget.getBoundingClientRect();
     setMousePos({
       x: e.clientX - rect.left,
       y: e.clientY - rect.top,
@@ -403,7 +401,6 @@ export const AgentSandboxesCarousel: React.FC<AgentSandboxesCarouselProps> = ({ 
                 initial="enter"
                 animate="center"
                 exit="exit"
-                ref={cardRef}
                 onMouseMove={handleMouseMove}
                 onMouseEnter={() => setIsHovered(true)}
                 onMouseLeave={() => setIsHovered(false)}
