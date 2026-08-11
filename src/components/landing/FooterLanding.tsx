@@ -1,6 +1,6 @@
 import React from 'react';
 import { Heart, ShieldCheck, FileText, Lock, RefreshCw, Mail, Phone, Headphones, GraduationCap } from 'lucide-react';
-import placivoAILogo from './placivoAI.png';
+import placivoAILogo from './Placivo-logo.png';
 
 interface FooterLandingProps {
   onOpenTerms?: (tab?: 'terms' | 'privacy' | 'cancellation') => void;

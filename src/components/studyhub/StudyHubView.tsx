@@ -18,7 +18,7 @@ import {
 } from 'lucide-react';
 import { StudySuite, UserProfile } from '../../types';
 import { AIChatView } from '../chat/AIChatView';
-import aiLogoImg from '../../assets/AILogo.svg';
+import aiLogoImg from '../landing/Placivo-logo.png';
 
 // Bespoke Placivo Assistant Core Logo Component
 const PersonalAssistantLogo: React.FC = () => {

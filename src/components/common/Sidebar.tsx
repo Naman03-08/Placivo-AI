@@ -18,9 +18,9 @@ import {
   Bot
 } from 'lucide-react';
 import { UserProfile } from '../../types';
-import placivoAILogo from '../landing/placivoAI.png';
+import placivoAILogo from '../landing/Placivo-logo.png';
 import dashboardImg from '../Dashboard.png';
-import aiLogoImg from '../../assets/AILogo.svg';
+import aiLogoImg from '../landing/Placivo-logo.png';
 
 interface SidebarProps {
   activeTab: string;

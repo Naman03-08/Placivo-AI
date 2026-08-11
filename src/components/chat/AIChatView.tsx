@@ -118,7 +118,7 @@ const renderStepIcon = (type: string) => {
   }
 };
 
-import aiLogoImg from '../../assets/AILogo.svg';
+import aiLogoImg from '../landing/Placivo-logo.png';
 
 // Custom Personalized Mini Assistant Logo in Light Theme
 const PersonalAssistantMiniLogo: React.FC = () => {

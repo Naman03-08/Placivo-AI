@@ -7,7 +7,7 @@ import { getDailyKey } from '../../lib/planUtils';
 import { UserProfile } from '../../types';
 import { StorageService } from '../../lib/storage';
 import { FirestoreService } from '../../lib/firestoreService';
-import logoImg from '../landing/placivoAI.png';
+import logoImg from '../landing/Placivo-logo.png';
 
 interface AuthModalProps {
   isOpen: boolean;

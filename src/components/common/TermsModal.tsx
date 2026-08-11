@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { X, ShieldCheck, FileText, Scale, ExternalLink, CheckCircle, Search, Mail, Phone, Building2, Lock, GraduationCap } from 'lucide-react';
-import placivoAILogo from '../landing/placivoAI.png';
+import placivoAILogo from '../landing/Placivo-logo.png';
 
 interface TermsModalProps {
   isOpen: boolean;

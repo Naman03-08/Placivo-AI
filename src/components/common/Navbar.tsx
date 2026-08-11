@@ -1,6 +1,6 @@
 import React from 'react';
 import { Zap, ArrowRight, BookOpen, Code, Award, Calendar, CheckSquare, Bot, GraduationCap } from 'lucide-react';
-import placivoAILogo from '../landing/placivoAI.png';
+import placivoAILogo from '../landing/Placivo-logo.png';
 
 interface NavbarProps {
   onNavigateLandingSection: (sectionId: string) => void;
