@@ -446,7 +446,7 @@ export const AdminPanelView: React.FC<AdminPanelViewProps> = ({ user, onNavigate
       subscriptionRevenue: subRev,
       courseRevenue: crsRev,
       grossProfit: totalGross,
-      subscriptionCount: Math.round(subRev / 199),
+      subscriptionCount: Math.round(subRev / 69),
       coursePurchaseCount: Math.round(crsRev / 599),
       updatedAt: new Date().toISOString()
     };
@@ -597,7 +597,7 @@ export const AdminPanelView: React.FC<AdminPanelViewProps> = ({ user, onNavigate
     } else if (rawPlan === 'free_trial') {
       planName = '4-Day Free Trial';
     } else if (rawPlan === 'plan_199') {
-      planName = 'Pro Scholar (₹199)';
+      planName = 'Pro Scholar (₹69)';
     } else if (rawPlan === 'plan_349' || rawPlan === 'plan_399') {
       planName = 'Pro Ultimate (₹399)';
     } else if (rawPlan && rawPlan !== 'none') {
@@ -608,7 +608,7 @@ export const AdminPanelView: React.FC<AdminPanelViewProps> = ({ user, onNavigate
     let price = 0;
     if (!isFree && !isCancelled) {
       if (rawPlan === 'plan_199') {
-        price = 199;
+        price = 69;
       } else if (rawPlan === 'plan_349' || rawPlan === 'plan_399') {
         price = 399;
       } else {
@@ -652,9 +652,9 @@ export const AdminPanelView: React.FC<AdminPanelViewProps> = ({ user, onNavigate
     );
     const subRevFromLogs = subPurchasesFromLogs.reduce((sum, p) => {
       let amt = p.pricePaid || 0;
-      // whenever any user will buy then don't show 349 or 399 in the profit section of Admin panel, show 199 instead
-      if (amt === 349 || amt === 399 || p.courseId === 'plan_349' || p.courseId === 'plan_399') {
-        amt = 199;
+      // whenever any user buys Pro Scholar, show 69
+      if (p.courseId === 'plan_199' && !amt) {
+        amt = 69;
       }
       return sum + amt;
     }, 0);
@@ -2294,7 +2294,7 @@ export const AdminPanelView: React.FC<AdminPanelViewProps> = ({ user, onNavigate
                   className="w-full px-3 py-2 text-xs font-bold rounded-xl bg-slate-50 border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500/20"
                 >
                   <option value="free_trial">4-Day Free Trial Pass (₹0)</option>
-                  <option value="plan_199">Pro Scholar Pass (₹199)</option>
+                  <option value="plan_199">Pro Scholar Pass (₹69)</option>
                   <option value="plan_399">Placivo Pro Ultimate (₹399)</option>
                   <option value="none">Free Tier / Demoted Access (₹0)</option>
                 </select>

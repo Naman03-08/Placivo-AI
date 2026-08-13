@@ -62,10 +62,10 @@ export const PLAN_DEFINITIONS: PlanInfo[] = [
     id: 'plan_199',
     name: 'Pro Scholar Pass',
     tagline: 'Perfect for active college students aiming for top GPAs & Placements',
-    priceMonthly: '₹199',
-    priceYearly: '₹1,899',
+    priceMonthly: '₹69',
+    priceYearly: '₹659',
     period: 'per month (30 Days)',
-    rawPrice: 199,
+    rawPrice: 69,
     popular: false,
     badge: 'Popular',
     badgeColor: 'bg-blue-50 text-blue-700 border-blue-200',
@@ -111,7 +111,7 @@ export const PLAN_DEFINITIONS: PlanInfo[] = [
       aiChatTutor: '10 /week'
     },
     features: [
-      'Everything in ₹199 Plan, PLUS:',
+      'Everything in ₹69 Plan, PLUS:',
       '10 /week AI Study Suites Generations',
       '10 /week AI Tutor Chat Assistant',
       'UNLIMITED Technical Interview Question Bank (All 256 Subjects)',
@@ -266,7 +266,7 @@ export function calculatePlanDetails(user: UserProfile) {
     }
   } else {
     if (currentPlanId === 'free_trial') planName = 'Free Trial (4 Days)';
-    if (currentPlanId === 'plan_199') planName = 'Pro Scholar (₹199)';
+    if (currentPlanId === 'plan_199') planName = 'Pro Scholar (₹69)';
     if (currentPlanId === 'plan_399') planName = 'Placivo Pro Ultimate (₹399)';
   }
 
@@ -382,7 +382,7 @@ export function checkStudySuiteLimit(user: UserProfile, currentCount: number): L
       featureName: 'AI Study Suites',
       message: allowed
         ? `Free Trial Pass: ${periodCount}/${maxLimit} Study Suites generated today.`
-        : `Free Trial daily limit reached (${maxLimit} Study Suite / day). Upgrade to Pro Scholar (₹199) or Pro Ultimate (₹399) for more generations!`
+        : `Free Trial daily limit reached (${maxLimit} Study Suite / day). Upgrade to Pro Scholar (₹69) or Pro Ultimate (₹399) for more generations!`
     };
   }
 
@@ -452,7 +452,7 @@ export function checkDSASolutionLimit(user: UserProfile, todayCount: number): Li
       featureName: '375 DSA AI Code Coach',
       message: allowed
         ? `Free Trial Pass: ${periodCount}/${maxLimit} DSA AI Solutions used today.`
-        : `Free Trial daily limit reached (${maxLimit} DSA Solutions / day). Upgrade to Pro Scholar (₹199) or Pro Ultimate (₹399) for UNLIMITED 375 DSA Sheet Solutions!`
+        : `Free Trial daily limit reached (${maxLimit} DSA Solutions / day). Upgrade to Pro Scholar (₹69) or Pro Ultimate (₹399) for UNLIMITED 375 DSA Sheet Solutions!`
     };
   }
 
@@ -491,7 +491,7 @@ export function checkAIChatLimit(user: UserProfile, currentChatCount: number): L
       featureName: '24/7 AI Academic Tutor Chat',
       message: allowed
         ? `Free Trial Pass: ${periodCount}/${maxLimit} AI Academic Tutor Chat session used today.`
-        : `Free Trial daily limit reached (${maxLimit} Chat session / day). Upgrade to Pro Scholar (₹199) or Pro Ultimate (₹399) for more chats!`
+        : `Free Trial daily limit reached (${maxLimit} Chat session / day). Upgrade to Pro Scholar (₹69) or Pro Ultimate (₹399) for more chats!`
     };
   }
 
@@ -621,7 +621,7 @@ export function checkPDFExportLimit(user: UserProfile): LimitCheckResult {
       featureName: 'PDF Resume Export',
       message: allowed
         ? `Free Trial Pass: ${periodCount}/${maxLimit} PDF exports completed today.`
-        : `Free Trial PDF export limit reached (${maxLimit} PDF Export/day). Upgrade to Pro Scholar (₹199) or Pro Ultimate (₹399) for unlimited downloads!`
+        : `Free Trial PDF export limit reached (${maxLimit} PDF Export/day). Upgrade to Pro Scholar (₹69) or Pro Ultimate (₹399) for unlimited downloads!`
     };
   }
 
@@ -652,7 +652,7 @@ export function checkInterviewPrepLimit(user: UserProfile, currentSessionCount: 
       maxLimit: 0,
       currentCount: currentSessionCount,
       featureName: 'Technical Interview Prep',
-      message: 'Technical Interview Prep is not included in the Free Trial. Upgrade to Pro Scholar (₹199) or Pro Ultimate (₹399) to gain full access!'
+      message: 'Technical Interview Prep is not included in the Free Trial. Upgrade to Pro Scholar (₹69) or Pro Ultimate (₹399) to gain full access!'
     };
   }
 

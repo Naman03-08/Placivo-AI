@@ -26,7 +26,7 @@ export const Pricing: React.FC<PricingProps> = ({ onOpenAuth }) => {
     },
     {
       name: 'Pro Scholar',
-      price: isAnnual ? '₹159' : '₹199',
+      price: isAnnual ? '₹55' : '₹69',
       period: 'per month',
       desc: 'Unlimited AI study tutoring, DSA sheet solutions & full study suites for active students.',
       features: [
@@ -38,7 +38,7 @@ export const Pricing: React.FC<PricingProps> = ({ onOpenAuth }) => {
         '24/7 AI Tutor Chat Assistant for College Subjects',
       ],
       popular: true,
-      cta: 'Upgrade to ₹199 Plan',
+      cta: 'Upgrade to ₹69 Plan',
     },
     {
       name: 'Placivo Pro Ultimate',
@@ -46,7 +46,7 @@ export const Pricing: React.FC<PricingProps> = ({ onOpenAuth }) => {
       period: 'per month',
       desc: 'Complete placement & technical interview preparation pass with 1-on-1 AI placement coaching.',
       features: [
-        'Everything in ₹199 Plan PLUS:',
+        'Everything in ₹69 Plan PLUS:',
         'Unlimited 1-on-1 Technical Interview Question Bank Access (256 Subjects)',
         'Unlimited High-Score ATS Resume Builder & Job Matcher',
         'Instant 375 DSA Code Coach (C++, Java, Python, TS)',
