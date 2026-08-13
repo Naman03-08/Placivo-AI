@@ -816,6 +816,407 @@ app.post("/api/ai/coding-coach", async (req, res) => {
   }
 });
 
+// ==========================================
+// GITHUB INTEGRATION & OAUTH API ROUTES
+// ==========================================
+const githubUserSessions = new Map<string, {
+  accessToken: string;
+  username: string;
+  avatarUrl: string;
+  selectedRepo?: any;
+  selectedBranch?: string;
+}>();
+
+// 1. Get GitHub OAuth Connect URL
+app.get("/api/github/connect-url", (req, res) => {
+  const userId = (req.query.userId as string) || "guest";
+  const clientId = process.env.GITHUB_CLIENT_ID || "";
+  const host = req.headers.host || "localhost:3000";
+  const protocol = req.headers["x-forwarded-proto"] || "http";
+  const redirectUri = process.env.GITHUB_CALLBACK_URL || `${protocol}://${host}/api/github/callback`;
+  
+  if (clientId) {
+    const stateObj = JSON.stringify({ userId, ts: Date.now() });
+    const stateEncoded = Buffer.from(stateObj).toString("base64");
+    const url = `https://github.com/login/oauth/authorize?client_id=${clientId}&redirect_uri=${encodeURIComponent(redirectUri)}&scope=repo%20user&state=${encodeURIComponent(stateEncoded)}`;
+    return res.json({ url, configured: true });
+  }
+  
+  return res.json({ url: null, configured: false });
+});
+
+// 2. GitHub OAuth Callback
+app.get("/api/github/callback", async (req, res) => {
+  try {
+    const { code, state } = req.query;
+    if (!code) {
+      return res.status(400).send("Missing OAuth code from GitHub.");
+    }
+
+    let userId = "guest";
+    if (state && typeof state === "string") {
+      try {
+        const decoded = JSON.parse(Buffer.from(state, "base64").toString("utf-8"));
+        if (decoded.userId) userId = decoded.userId;
+      } catch {
+        // Ignore state parse error
+      }
+    }
+
+    const clientId = process.env.GITHUB_CLIENT_ID || "";
+    const clientSecret = process.env.GITHUB_CLIENT_SECRET || "";
+
+    if (!clientId || !clientSecret) {
+      return res.status(400).send("GitHub Client ID or Secret is missing in server environment.");
+    }
+
+    const host = req.headers.host || "localhost:3000";
+    const protocol = req.headers["x-forwarded-proto"] || "http";
+    const redirectUri = process.env.GITHUB_CALLBACK_URL || `${protocol}://${host}/api/github/callback`;
+
+    const tokenRes = await fetch("https://github.com/login/oauth/access_token", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json"
+      },
+      body: JSON.stringify({
+        client_id: clientId,
+        client_secret: clientSecret,
+        code,
+        redirect_uri: redirectUri
+      })
+    });
+
+    const tokenData = await tokenRes.json();
+    if (!tokenData.access_token) {
+      return res.status(400).send("Failed to retrieve access token from GitHub: " + (tokenData.error_description || "Unknown error"));
+    }
+
+    const accessToken = tokenData.access_token;
+
+    // Fetch user profile from GitHub API
+    const userRes = await fetch("https://api.github.com/user", {
+      headers: {
+        "Authorization": `Bearer ${accessToken}`,
+        "User-Agent": "Placivo-AI"
+      }
+    });
+
+    const ghUser = await userRes.json();
+
+    // Save session in server memory store
+    githubUserSessions.set(userId, {
+      accessToken,
+      username: ghUser.login || "github_user",
+      avatarUrl: ghUser.avatar_url || "",
+      selectedRepo: null,
+      selectedBranch: "main"
+    });
+
+    const html = `<!DOCTYPE html>
+    <html>
+    <head><title>GitHub Connected</title></head>
+    <body style="background:#0f172a;color:#fff;font-family:sans-serif;display:flex;align-items:center;justify-content:center;height:100vh;margin:0;">
+      <div style="text-align:center;padding:2rem;">
+        <h2 style="color:#38bdf8;">✓ GitHub Successfully Connected!</h2>
+        <p style="color:#94a3b8;">Logged in as @${ghUser.login}. Closing window...</p>
+        <script>
+          if (window.opener) {
+            window.opener.postMessage({
+              type: 'GITHUB_AUTH_SUCCESS',
+              githubUsername: '${ghUser.login}',
+              githubAvatarUrl: '${ghUser.avatar_url}',
+              userId: '${userId}'
+            }, '*');
+          }
+          setTimeout(() => window.close(), 1200);
+        </script>
+      </div>
+    </body>
+    </html>`;
+
+    res.setHeader("Content-Type", "text/html");
+    return res.send(html);
+  } catch (err: any) {
+    console.error("GitHub callback error:", err);
+    return res.status(500).send("GitHub authentication error: " + err.message);
+  }
+});
+
+// 3. Connect via Personal Access Token (PAT)
+app.post("/api/github/connect-pat", async (req, res) => {
+  try {
+    const { userId, token, username } = req.body;
+    if (!token || !token.trim()) {
+      return res.status(400).json({ error: "Personal Access Token is required." });
+    }
+
+    const cleanToken = token.trim();
+    let ghUser: any = {};
+
+    try {
+      const userRes = await fetch("https://api.github.com/user", {
+        headers: {
+          "Authorization": `Bearer ${cleanToken}`,
+          "User-Agent": "Placivo-AI"
+        }
+      });
+      if (userRes.ok) {
+        ghUser = await userRes.json();
+      }
+    } catch {
+      // Fallback if fine-grained token without user read
+    }
+
+    const finalUsername = ghUser.login || username || "github_user";
+    const finalAvatar = ghUser.avatar_url || `https://github.com/${finalUsername}.png`;
+
+    githubUserSessions.set(userId || "guest", {
+      accessToken: cleanToken,
+      username: finalUsername,
+      avatarUrl: finalAvatar,
+      selectedRepo: null,
+      selectedBranch: "main"
+    });
+
+    return res.json({
+      success: true,
+      username: finalUsername,
+      avatarUrl: finalAvatar
+    });
+  } catch (err: any) {
+    return res.status(500).json({ error: err.message });
+  }
+});
+
+// 4. Get GitHub Connection Status
+app.get("/api/github/status", (req, res) => {
+  const userId = (req.query.userId as string) || "guest";
+  const session = githubUserSessions.get(userId);
+  if (session) {
+    return res.json({
+      connected: true,
+      username: session.username,
+      avatarUrl: session.avatarUrl,
+      selectedRepo: session.selectedRepo || null,
+      selectedBranch: session.selectedBranch || "main"
+    });
+  }
+  return res.json({ connected: false });
+});
+
+// 5. Fetch User Repositories
+app.get("/api/github/repositories", async (req, res) => {
+  try {
+    const userId = (req.query.userId as string) || "guest";
+    const session = githubUserSessions.get(userId);
+    if (!session) {
+      return res.status(401).json({ error: "GitHub account not connected." });
+    }
+
+    const reposRes = await fetch("https://api.github.com/user/repos?per_page=100&sort=updated&type=all", {
+      headers: {
+        "Authorization": `Bearer ${session.accessToken}`,
+        "User-Agent": "Placivo-AI"
+      }
+    });
+
+    if (!reposRes.ok) {
+      return res.status(reposRes.status).json({ error: "Failed to fetch repositories from GitHub." });
+    }
+
+    const rawRepos = await reposRes.json();
+    const repos = (Array.isArray(rawRepos) ? rawRepos : []).map((r: any) => ({
+      id: r.id,
+      name: r.name,
+      fullName: r.full_name,
+      owner: r.owner?.login || session.username,
+      isPrivate: !!r.private,
+      defaultBranch: r.default_branch || "main",
+      htmlUrl: r.html_url,
+      description: r.description || ""
+    }));
+
+    return res.json({ repositories: repos });
+  } catch (err: any) {
+    return res.status(500).json({ error: err.message });
+  }
+});
+
+// 6. Create New Repository on GitHub
+app.post("/api/github/repositories", async (req, res) => {
+  try {
+    const { userId, name, description, isPrivate } = req.body;
+    const session = githubUserSessions.get(userId || "guest");
+    if (!session) {
+      return res.status(401).json({ error: "GitHub account not connected." });
+    }
+
+    const createRes = await fetch("https://api.github.com/user/repos", {
+      method: "POST",
+      headers: {
+        "Authorization": `Bearer ${session.accessToken}`,
+        "Content-Type": "application/json",
+        "User-Agent": "Placivo-AI"
+      },
+      body: JSON.stringify({
+        name: name.trim(),
+        description: description || "Data Structures & Algorithms solutions solved on Placivo AI",
+        private: !!isPrivate,
+        auto_init: true
+      })
+    });
+
+    const repoData = await createRes.json();
+    if (!createRes.ok) {
+      return res.status(createRes.status).json({ error: repoData.message || "Failed to create repository on GitHub." });
+    }
+
+    const repoObj = {
+      id: repoData.id,
+      name: repoData.name,
+      fullName: repoData.full_name,
+      owner: repoData.owner?.login || session.username,
+      isPrivate: !!repoData.private,
+      defaultBranch: repoData.default_branch || "main",
+      htmlUrl: repoData.html_url,
+      description: repoData.description || ""
+    };
+
+    // Initialize README.md
+    try {
+      const readmeContent = `# ${repoData.name} 🚀\n\nWelcome to my Data Structures and Algorithms repository, automatically synced with [Placivo AI](https://placivo.ai).\n\n## 📊 Progress Summary\n- **Total Solved**: 0\n- **Easy**: 0\n- **Medium**: 0\n- **Hard**: 0\n\n## 📂 Directory Structure\nSolutions are organized into category folders (e.g. \`Arrays/Two-Sum.cpp\`, \`Dynamic-Programming/Coin-Change.py\`).\n`;
+      
+      await fetch(`https://api.github.com/repos/${repoObj.fullName}/contents/README.md`, {
+        method: "PUT",
+        headers: {
+          "Authorization": `Bearer ${session.accessToken}`,
+          "Content-Type": "application/json",
+          "User-Agent": "Placivo-AI"
+        },
+        body: JSON.stringify({
+          message: "Initialize Placivo DSA Solutions README",
+          content: Buffer.from(readmeContent).toString("base64"),
+          branch: repoObj.defaultBranch
+        })
+      });
+    } catch (e) {
+      console.warn("Error initializing README.md on GitHub:", e);
+    }
+
+    session.selectedRepo = repoObj;
+    session.selectedBranch = repoObj.defaultBranch;
+
+    return res.json({ repository: repoObj });
+  } catch (err: any) {
+    return res.status(500).json({ error: err.message });
+  }
+});
+
+// 7. Select Target Repository
+app.post("/api/github/select-repo", (req, res) => {
+  const { userId, owner, name, fullName, defaultBranch } = req.body;
+  const session = githubUserSessions.get(userId || "guest");
+  if (!session) {
+    return res.status(401).json({ error: "GitHub account not connected." });
+  }
+
+  session.selectedRepo = {
+    name,
+    fullName: fullName || `${owner}/${name}`,
+    owner,
+    isPrivate: false,
+    defaultBranch: defaultBranch || "main",
+    htmlUrl: `https://github.com/${owner}/${name}`
+  };
+  session.selectedBranch = defaultBranch || "main";
+
+  return res.json({ success: true, selectedRepo: session.selectedRepo });
+});
+
+// 8. Commit & Push Solution Code to GitHub
+app.post("/api/github/push-solution", async (req, res) => {
+  try {
+    const { userId, title, category, difficulty, code, path: requestedPath, commitMessage, forceOverwrite } = req.body;
+    const session = githubUserSessions.get(userId || "guest");
+    if (!session || !session.selectedRepo) {
+      return res.status(400).json({ error: "Please connect your GitHub account and select a target repository first." });
+    }
+
+    const repo = session.selectedRepo;
+    const branch = session.selectedBranch || repo.defaultBranch || "main";
+    const targetPath = requestedPath || `${category || "Algorithms"}/${title || "Solution"}.cpp`;
+
+    // Check if file already exists in repository
+    let existingSha: string | undefined = undefined;
+    const checkRes = await fetch(`https://api.github.com/repos/${repo.fullName}/contents/${targetPath}?ref=${branch}`, {
+      headers: {
+        "Authorization": `Bearer ${session.accessToken}`,
+        "User-Agent": "Placivo-AI"
+      }
+    });
+
+    if (checkRes.ok) {
+      const existingFile = await checkRes.json();
+      existingSha = existingFile.sha;
+
+      if (!forceOverwrite) {
+        return res.json({
+          conflict: true,
+          existingSha,
+          path: targetPath,
+          message: `A solution file already exists at '${targetPath}' in repository '${repo.fullName}'. Overwrite existing solution?`
+        });
+      }
+    }
+
+    // Commit and push file to GitHub
+    const putBody: any = {
+      message: commitMessage || `Add solution: ${title || "DSA Problem"} (${difficulty || "Medium"})`,
+      content: Buffer.from(code).toString("base64"),
+      branch
+    };
+    if (existingSha) {
+      putBody.sha = existingSha;
+    }
+
+    const pushRes = await fetch(`https://api.github.com/repos/${repo.fullName}/contents/${targetPath}`, {
+      method: "PUT",
+      headers: {
+        "Authorization": `Bearer ${session.accessToken}`,
+        "Content-Type": "application/json",
+        "User-Agent": "Placivo-AI"
+      },
+      body: JSON.stringify(putBody)
+    });
+
+    const pushData = await pushRes.json();
+    if (!pushRes.ok) {
+      return res.status(pushRes.status).json({ error: pushData.message || "Failed to commit solution to GitHub." });
+    }
+
+    const fileHtmlUrl = pushData.content?.html_url || `https://github.com/${repo.fullName}/blob/${branch}/${targetPath}`;
+
+    return res.json({
+      success: true,
+      path: targetPath,
+      htmlUrl: fileHtmlUrl,
+      commitSha: pushData.commit?.sha
+    });
+  } catch (err: any) {
+    console.error("Error in push-solution route:", err);
+    return res.status(500).json({ error: err.message });
+  }
+});
+
+// 9. Disconnect GitHub Connection
+app.post("/api/github/disconnect", (req, res) => {
+  const { userId } = req.body;
+  githubUserSessions.delete(userId || "guest");
+  return res.json({ success: true });
+});
+
 // 3. Assignment Solver Route (Feature & AI Usage Disabled)
 app.post("/api/ai/assignment-solver", async (_req, res) => {
   return res.status(403).json({
