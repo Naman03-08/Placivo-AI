@@ -599,7 +599,7 @@ export const AdminPanelView: React.FC<AdminPanelViewProps> = ({ user, onNavigate
     } else if (rawPlan === 'plan_199') {
       planName = 'Pro Scholar (₹99)';
     } else if (rawPlan === 'plan_349' || rawPlan === 'plan_399') {
-      planName = 'Pro Ultimate (₹399)';
+      planName = 'Pro Ultimate (₹199)';
     } else if (rawPlan && rawPlan !== 'none') {
       planName = rawPlan;
     }
@@ -610,9 +610,9 @@ export const AdminPanelView: React.FC<AdminPanelViewProps> = ({ user, onNavigate
       if (rawPlan === 'plan_199') {
         price = 99;
       } else if (rawPlan === 'plan_349' || rawPlan === 'plan_399') {
-        price = 399;
+        price = 199;
       } else {
-        price = 399; // Default paid plan rate
+        price = 199; // Default paid plan rate
       }
     }
 
@@ -2295,7 +2295,7 @@ export const AdminPanelView: React.FC<AdminPanelViewProps> = ({ user, onNavigate
                 >
                   <option value="free_trial">4-Day Free Trial Pass (₹0)</option>
                   <option value="plan_199">Pro Scholar Pass (₹99)</option>
-                  <option value="plan_399">Placivo Pro Ultimate (₹399)</option>
+                  <option value="plan_399">Placivo Pro Ultimate (₹199)</option>
                   <option value="none">Free Tier / Demoted Access (₹0)</option>
                 </select>
               </div>

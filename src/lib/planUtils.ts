@@ -95,10 +95,10 @@ export const PLAN_DEFINITIONS: PlanInfo[] = [
     id: 'plan_399',
     name: 'Placivo Pro Ultimate',
     tagline: 'The most valuable plan for every individual to master academics, placement prep, and high-scoring DSA.',
-    priceMonthly: '₹399',
-    priceYearly: '₹3,799',
+    priceMonthly: '₹199',
+    priceYearly: '₹1,899',
     period: 'per month (30 Days)',
-    rawPrice: 399,
+    rawPrice: 199,
     popular: true,
     badge: 'Most Recommended',
     badgeColor: 'bg-indigo-600 text-white shadow-xs',
@@ -267,7 +267,7 @@ export function calculatePlanDetails(user: UserProfile) {
   } else {
     if (currentPlanId === 'free_trial') planName = 'Free Trial (4 Days)';
     if (currentPlanId === 'plan_199') planName = 'Pro Scholar (₹99)';
-    if (currentPlanId === 'plan_399') planName = 'Placivo Pro Ultimate (₹399)';
+    if (currentPlanId === 'plan_399') planName = 'Placivo Pro Ultimate (₹199)';
   }
 
   const formattedStartedAt = startedAtMs > 0 ? new Date(startedAtMs).toLocaleDateString('en-IN', {
@@ -382,7 +382,7 @@ export function checkStudySuiteLimit(user: UserProfile, currentCount: number): L
       featureName: 'AI Study Suites',
       message: allowed
         ? `Free Trial Pass: ${periodCount}/${maxLimit} Study Suites generated today.`
-        : `Free Trial daily limit reached (${maxLimit} Study Suite / day). Upgrade to Pro Scholar (₹99) or Pro Ultimate (₹399) for more generations!`
+        : `Free Trial daily limit reached (${maxLimit} Study Suite / day). Upgrade to Pro Scholar (₹99) or Pro Ultimate (₹199) for more generations!`
     };
   }
 
@@ -398,7 +398,7 @@ export function checkStudySuiteLimit(user: UserProfile, currentCount: number): L
       featureName: 'AI Study Suites',
       message: allowed
         ? `Pro Scholar Plan: ${periodCount}/${maxLimit} Study Suites generated this week.`
-        : `Pro Scholar weekly limit reached (${maxLimit} Generations/week). Upgrade to Placivo Pro Ultimate (₹399) for 10 generations/week!`
+        : `Pro Scholar weekly limit reached (${maxLimit} Generations/week). Upgrade to Placivo Pro Ultimate (₹199) for 10 generations/week!`
     };
   }
 
@@ -452,7 +452,7 @@ export function checkDSASolutionLimit(user: UserProfile, todayCount: number): Li
       featureName: '375 DSA AI Code Coach',
       message: allowed
         ? `Free Trial Pass: ${periodCount}/${maxLimit} DSA AI Solutions used today.`
-        : `Free Trial daily limit reached (${maxLimit} DSA Solutions / day). Upgrade to Pro Scholar (₹99) or Pro Ultimate (₹399) for UNLIMITED 375 DSA Sheet Solutions!`
+        : `Free Trial daily limit reached (${maxLimit} DSA Solutions / day). Upgrade to Pro Scholar (₹99) or Pro Ultimate (₹199) for UNLIMITED 375 DSA Sheet Solutions!`
     };
   }
 
@@ -491,7 +491,7 @@ export function checkAIChatLimit(user: UserProfile, currentChatCount: number): L
       featureName: '24/7 AI Academic Tutor Chat',
       message: allowed
         ? `Free Trial Pass: ${periodCount}/${maxLimit} AI Academic Tutor Chat session used today.`
-        : `Free Trial daily limit reached (${maxLimit} Chat session / day). Upgrade to Pro Scholar (₹99) or Pro Ultimate (₹399) for more chats!`
+        : `Free Trial daily limit reached (${maxLimit} Chat session / day). Upgrade to Pro Scholar (₹99) or Pro Ultimate (₹199) for more chats!`
     };
   }
 
@@ -507,7 +507,7 @@ export function checkAIChatLimit(user: UserProfile, currentChatCount: number): L
       featureName: '24/7 AI Academic Tutor Chat',
       message: allowed
         ? `Pro Scholar Plan: ${periodCount}/${maxLimit} AI Tutor messages used today.`
-        : `Pro Scholar daily chat limit reached (${maxLimit} messages/day). Upgrade to Placivo Pro Ultimate (₹399) for 10 messages/week!`
+        : `Pro Scholar daily chat limit reached (${maxLimit} messages/day). Upgrade to Placivo Pro Ultimate (₹199) for 10 messages/week!`
     };
   }
 
@@ -577,7 +577,7 @@ export function checkResumeScanLimit(user: UserProfile, currentScanCount: number
       featureName: 'ATS Resume Scans',
       message: allowed
         ? `Pro Scholar Plan: ${periodCount}/${maxLimit} ATS Resume Scans used this month.`
-        : `Pro Scholar monthly limit reached (${maxLimit} Scans/month). Upgrade to Placivo Pro Ultimate (₹399) for 10 Scans/month & Resume Builder!`
+        : `Pro Scholar monthly limit reached (${maxLimit} Scans/month). Upgrade to Placivo Pro Ultimate (₹199) for 10 Scans/month & Resume Builder!`
     };
   }
 
@@ -621,7 +621,7 @@ export function checkPDFExportLimit(user: UserProfile): LimitCheckResult {
       featureName: 'PDF Resume Export',
       message: allowed
         ? `Free Trial Pass: ${periodCount}/${maxLimit} PDF exports completed today.`
-        : `Free Trial PDF export limit reached (${maxLimit} PDF Export/day). Upgrade to Pro Scholar (₹99) or Pro Ultimate (₹399) for unlimited downloads!`
+        : `Free Trial PDF export limit reached (${maxLimit} PDF Export/day). Upgrade to Pro Scholar (₹99) or Pro Ultimate (₹199) for unlimited downloads!`
     };
   }
 
@@ -652,7 +652,7 @@ export function checkInterviewPrepLimit(user: UserProfile, currentSessionCount: 
       maxLimit: 0,
       currentCount: currentSessionCount,
       featureName: 'Technical Interview Prep',
-      message: 'Technical Interview Prep is not included in the Free Trial. Upgrade to Pro Scholar (₹99) or Pro Ultimate (₹399) to gain full access!'
+      message: 'Technical Interview Prep is not included in the Free Trial. Upgrade to Pro Scholar (₹99) or Pro Ultimate (₹199) to gain full access!'
     };
   }
 

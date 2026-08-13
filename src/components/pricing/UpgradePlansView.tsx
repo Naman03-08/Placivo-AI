@@ -153,7 +153,7 @@ export const UpgradePlansView: React.FC<UpgradePlansProps> = ({ user, onUpdatePr
     
     if (plan.id === 'free_trial') {
       if (planDetails.freeTrialUsed) {
-        setErrorMessage('Free Trial is valid once per account for 4 days only. You have already used your trial! Please select the ₹99 or ₹399 plan.');
+        setErrorMessage('Free Trial is valid once per account for 4 days only. You have already used your trial! Please select the ₹99 or ₹199 plan.');
         return;
       }
 
@@ -252,7 +252,7 @@ export const UpgradePlansView: React.FC<UpgradePlansProps> = ({ user, onUpdatePr
         subtitle="Choose the ideal plan to accelerate your academic grades, DSA mastery, and placement success"
         purpose="Upgrade to unlock unlimited AI Academic Tutor Chat, full Placivo 375 DSA Roadmap Code Coach, unlimited ATS Resume Scans, and Technical Interview Prep."
         keyFeatures={[
-          '3 Plans: 4-Day Free Trial (Choose When to Start), ₹99 & ₹399 Plans',
+          '3 Plans: 4-Day Free Trial (Choose When to Start), ₹99 & ₹199 Plans',
           '30-Day Auto Renewal Cycles for Pro Scholar & Ultimate Plans',
           'Unlimited AI Study Suites, AI Academic Tutor Chat & 375 DSA Sheet Solutions',
           'Instant Activation via UPI, QR Code, Net Banking, or Cards'
@@ -598,7 +598,7 @@ export const UpgradePlansView: React.FC<UpgradePlansProps> = ({ user, onUpdatePr
                 <th className="py-3 px-4 w-2/5">Feature / Capability</th>
                 <th className="py-3 px-4 text-center">Free Trial (4 Days 1x)</th>
                 <th className="py-3 px-4 text-center text-blue-600">Pro Scholar (₹99 / 30 Days)</th>
-                <th className="py-3 px-4 text-center text-indigo-600">Placivo Pro Ultimate (₹399 / 30 Days)</th>
+                <th className="py-3 px-4 text-center text-indigo-600">Placivo Pro Ultimate (₹199 / 30 Days)</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-slate-100 font-medium text-slate-800">

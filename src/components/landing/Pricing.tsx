@@ -42,7 +42,7 @@ export const Pricing: React.FC<PricingProps> = ({ onOpenAuth }) => {
     },
     {
       name: 'Placivo Pro Ultimate',
-      price: isAnnual ? '₹319' : '₹399',
+      price: isAnnual ? '₹159' : '₹199',
       period: 'per month',
       desc: 'Complete placement & technical interview preparation pass with 1-on-1 AI placement coaching.',
       features: [
@@ -54,7 +54,7 @@ export const Pricing: React.FC<PricingProps> = ({ onOpenAuth }) => {
         'Verified Placivo Completion Certificate',
       ],
       popular: false,
-      cta: 'Upgrade to ₹399 Plan',
+      cta: 'Upgrade to ₹199 Plan',
     },
   ];
 
