@@ -529,7 +529,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenAuth, onExploreDemo }) => {
         {/* Trusted By Banner */}
         <div className="mt-12 pt-8 border-t border-slate-200/60 text-center">
           <p className="text-xs sm:text-sm font-semibold text-slate-500 mb-6">
-            Trusted by <span className="text-blue-600 font-extrabold">2.5M+</span> students from <span className="text-blue-600 font-extrabold">1,200+</span> colleges
+            Trusted by <span className="text-blue-600 font-extrabold">2,500+</span> students from <span className="text-blue-600 font-extrabold">50+</span> colleges
           </p>
 
           <div className="flex flex-wrap items-center justify-center gap-6 sm:gap-10 opacity-75 grayscale hover:grayscale-0 transition-all">
@@ -554,14 +554,14 @@ export const Hero: React.FC<HeroProps> = ({ onOpenAuth, onExploreDemo }) => {
           </div>
         </div>
 
-        {/* Stats Grid Bar (2.5M+ Active Students, 1,200+ Top Colleges, 25M+ Notes, 100K+ Placements, 4.9/5 Rating) */}
+        {/* Stats Grid Bar (2,500+ Active Students, 50+ Top Colleges, 1,200+ Notes, 350+ Placements, 4.8/5 Rating) */}
         <div className="mt-8 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3.5 sm:gap-4">
           <div className="p-4 rounded-2xl bg-white/90 backdrop-blur-md border border-slate-200/80 shadow-xs flex items-center gap-3.5 hover:shadow-md transition-shadow">
             <div className="w-10 h-10 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center shrink-0">
               <Users className="w-5 h-5" />
             </div>
             <div className="text-left">
-              <div className="text-base sm:text-lg font-black text-slate-900 leading-tight">2.5M+</div>
+              <div className="text-base sm:text-lg font-black text-slate-900 leading-tight">2,500+</div>
               <div className="text-[11px] font-medium text-slate-500">Active Students</div>
             </div>
           </div>
@@ -571,7 +571,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenAuth, onExploreDemo }) => {
               <Landmark className="w-5 h-5" />
             </div>
             <div className="text-left">
-              <div className="text-base sm:text-lg font-black text-slate-900 leading-tight">1,200+</div>
+              <div className="text-base sm:text-lg font-black text-slate-900 leading-tight">50+</div>
               <div className="text-[11px] font-medium text-slate-500">Top Colleges</div>
             </div>
           </div>
@@ -581,7 +581,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenAuth, onExploreDemo }) => {
               <FileText className="w-5 h-5" />
             </div>
             <div className="text-left">
-              <div className="text-base sm:text-lg font-black text-slate-900 leading-tight">25M+</div>
+              <div className="text-base sm:text-lg font-black text-slate-900 leading-tight">1,200+</div>
               <div className="text-[11px] font-medium text-slate-500">Notes & Resources</div>
             </div>
           </div>
@@ -591,7 +591,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenAuth, onExploreDemo }) => {
               <Briefcase className="w-5 h-5" />
             </div>
             <div className="text-left">
-              <div className="text-base sm:text-lg font-black text-slate-900 leading-tight">100K+</div>
+              <div className="text-base sm:text-lg font-black text-slate-900 leading-tight">350+</div>
               <div className="text-[11px] font-medium text-slate-500">Placement Opportunities</div>
             </div>
           </div>
@@ -601,7 +601,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenAuth, onExploreDemo }) => {
               <Star className="w-5 h-5 text-amber-500 fill-amber-500" />
             </div>
             <div className="text-left">
-              <div className="text-base sm:text-lg font-black text-slate-900 leading-tight">4.9/5</div>
+              <div className="text-base sm:text-lg font-black text-slate-900 leading-tight">4.8/5</div>
               <div className="text-[11px] font-medium text-slate-500">Student Rating</div>
             </div>
           </div>
