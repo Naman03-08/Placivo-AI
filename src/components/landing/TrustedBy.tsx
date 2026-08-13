@@ -24,10 +24,8 @@ export const TrustedBy: React.FC = () => {
     };
   }, []);
 
-  // Calculate student count: Base 500.
-  // For every 100 registered users, increment display by 100.
-  // (e.g. 0-99 users -> 500+, 100-199 users -> 600+, 200-299 users -> 700+, etc.)
-  const displayStudentCount = (500 + Math.floor(registeredCount / 100) * 100).toLocaleString('en-IN');
+  // Calculate student count: Base 2,500,000.
+  const displayStudentCount = (2500000 + registeredCount).toLocaleString('en-IN');
 
   const indianUniversities = [
     'BITS Pilani',
@@ -55,7 +53,7 @@ export const TrustedBy: React.FC = () => {
       <div className="w-full max-w-[1800px] mx-auto px-4 sm:px-8 lg:px-12 text-center mb-6">
         <p className="text-xs font-black uppercase tracking-widest text-slate-700 inline-flex items-center gap-2 bg-white/60 backdrop-blur-md px-4 py-1.5 rounded-full border border-white/80 shadow-2xs">
           <GraduationCap className="w-4 h-4 text-blue-600" />
-          <span>Trusted by <span className="text-blue-600 font-black">{displayStudentCount}+</span> Students All Over India</span>
+          <span>Trusted by <span className="text-blue-600 font-black">1,200+</span> Colleges & <span className="text-blue-600 font-black">2.5M+</span> Students All Over India</span>
         </p>
       </div>
 
