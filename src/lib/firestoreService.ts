@@ -1160,9 +1160,9 @@ export class FirestoreService {
           if (data) {
             const isSub = data.id.startsWith('sub_') || (data.courseTitle && data.courseTitle.toLowerCase().includes('subscription'));
             if (isSub && data.paymentStatus !== 'Cancelled (No Refund)') {
-              let effectivePrice = data.pricePaid || 69;
+              let effectivePrice = data.pricePaid || 99;
               if (effectivePrice === 349 || effectivePrice === 399) {
-                effectivePrice = 69;
+                effectivePrice = 99;
               }
               totalSubDeduction += effectivePrice;
 
@@ -1184,7 +1184,7 @@ export class FirestoreService {
         const allProfits = await this.getMonthlyProfits();
         const existingMonth = allProfits.find(m => m.monthKey === monthKey);
         if (existingMonth) {
-          const deduction = subTransactionFound ? totalSubDeduction : 69;
+          const deduction = subTransactionFound ? totalSubDeduction : 99;
           const subRev = Math.max(0, (existingMonth.subscriptionRevenue || 0) - deduction);
           const crsRev = existingMonth.courseRevenue || 0;
           const subCount = Math.max(0, (existingMonth.subscriptionCount || 0) - 1);

@@ -495,7 +495,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
               </h3>
               <p className="text-xs text-slate-300 mt-0.5 max-w-xl">
                 {planDetails.isExpired 
-                  ? 'Please upgrade to Pro Scholar (₹69) or Placivo Pro Ultimate (₹399) to continue using AI tools.'
+                  ? 'Please upgrade to Pro Scholar (₹99) or Placivo Pro Ultimate (₹399) to continue using AI tools.'
                   : 'You are currently browsing in website preview mode. Activate your 4-day free trial whenever you are ready!'}
               </p>
             </div>

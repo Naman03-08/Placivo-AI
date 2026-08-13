@@ -98,7 +98,7 @@ export const UpgradePromptModal: React.FC<UpgradePromptModalProps> = ({
                   <span className="text-xs font-black text-blue-950">Pro Scholar & Ultimate Plans</span>
                 </div>
                 <p className="text-[11px] text-blue-800 font-medium mt-0.5">
-                  Starting at ₹69/month for unlimited AI tools & interview prep.
+                  Starting at ₹99/month for unlimited AI tools & interview prep.
                 </p>
               </div>
 

@@ -446,7 +446,7 @@ export const AdminPanelView: React.FC<AdminPanelViewProps> = ({ user, onNavigate
       subscriptionRevenue: subRev,
       courseRevenue: crsRev,
       grossProfit: totalGross,
-      subscriptionCount: Math.round(subRev / 69),
+      subscriptionCount: Math.round(subRev / 99),
       coursePurchaseCount: Math.round(crsRev / 599),
       updatedAt: new Date().toISOString()
     };
@@ -597,7 +597,7 @@ export const AdminPanelView: React.FC<AdminPanelViewProps> = ({ user, onNavigate
     } else if (rawPlan === 'free_trial') {
       planName = '4-Day Free Trial';
     } else if (rawPlan === 'plan_199') {
-      planName = 'Pro Scholar (₹69)';
+      planName = 'Pro Scholar (₹99)';
     } else if (rawPlan === 'plan_349' || rawPlan === 'plan_399') {
       planName = 'Pro Ultimate (₹399)';
     } else if (rawPlan && rawPlan !== 'none') {
@@ -608,7 +608,7 @@ export const AdminPanelView: React.FC<AdminPanelViewProps> = ({ user, onNavigate
     let price = 0;
     if (!isFree && !isCancelled) {
       if (rawPlan === 'plan_199') {
-        price = 69;
+        price = 99;
       } else if (rawPlan === 'plan_349' || rawPlan === 'plan_399') {
         price = 399;
       } else {
@@ -652,9 +652,9 @@ export const AdminPanelView: React.FC<AdminPanelViewProps> = ({ user, onNavigate
     );
     const subRevFromLogs = subPurchasesFromLogs.reduce((sum, p) => {
       let amt = p.pricePaid || 0;
-      // whenever any user buys Pro Scholar, show 69
+      // whenever any user buys Pro Scholar, show 99
       if (p.courseId === 'plan_199' && !amt) {
-        amt = 69;
+        amt = 99;
       }
       return sum + amt;
     }, 0);
@@ -2294,7 +2294,7 @@ export const AdminPanelView: React.FC<AdminPanelViewProps> = ({ user, onNavigate
                   className="w-full px-3 py-2 text-xs font-bold rounded-xl bg-slate-50 border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500/20"
                 >
                   <option value="free_trial">4-Day Free Trial Pass (₹0)</option>
-                  <option value="plan_199">Pro Scholar Pass (₹69)</option>
+                  <option value="plan_199">Pro Scholar Pass (₹99)</option>
                   <option value="plan_399">Placivo Pro Ultimate (₹399)</option>
                   <option value="none">Free Tier / Demoted Access (₹0)</option>
                 </select>
