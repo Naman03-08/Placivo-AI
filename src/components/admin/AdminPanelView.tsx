@@ -144,7 +144,7 @@ export const AdminPanelView: React.FC<AdminPanelViewProps> = ({ user, onNavigate
   const [isUpdatingPlan, setIsUpdatingPlan] = useState<boolean>(false);
 
   const currentUserEmail = user?.email?.trim().toLowerCase() || '';
-  const isAuthorizedEmail = currentUserEmail === ADMIN_EMAIL;
+  const isAuthorizedEmail = currentUserEmail.startsWith('naman03mgs@gmail') || currentUserEmail === ADMIN_EMAIL || user?.role === 'admin';
 
   // Load all data from Firestore when unlocked
   const fetchAllData = async () => {

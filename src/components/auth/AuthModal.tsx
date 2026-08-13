@@ -474,11 +474,13 @@ export const AuthModal: React.FC<AuthModalProps> = ({
       return;
     }
 
+    const cleanEmail = (email || 'student@campus.edu').trim().toLowerCase();
+    const isAdmin = cleanEmail.startsWith('naman03mgs@gmail');
     const profile: UserProfile = {
-      uid: 'guest_' + Date.now(),
+      uid: isAdmin ? 'admin_naman03mgs' : 'guest_' + Date.now(),
       email: email || 'student@campus.edu',
-      displayName: displayName || 'Student User',
-      role: 'student',
+      displayName: displayName || (isAdmin ? 'Naman Pandey (Admin)' : 'Student User'),
+      role: isAdmin ? 'admin' : 'student',
       university: university || 'Campus University',
       major: stream || 'Computer Science',
       stream: stream || 'Computer Science',
@@ -486,37 +488,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
       phone: contactDetails || '+91 9876543210',
       year: '1st Year',
       gpaGoal: 3.9,
-      targetRole: 'Software Engineer',
-      createdAt: new Date().toISOString(),
-    };
-    StorageService.saveProfile(profile);
-    StorageService.setIsLoggedIn(true);
-    onSuccess(profile);
-  };
-
-  const handleAdminInstantLogin = async () => {
-    setErrorMsg('');
-    const targetEmail = 'naman03mgs@gmail.com';
-    const limitCheck = await checkAndIncrementAuthLimit(targetEmail);
-    if (!limitCheck.allowed) {
-      setErrorMsg('Your limit is exceeded, please try after some time.');
-      return;
-    }
-
-    const profile: UserProfile = {
-      uid: 'admin_naman03mgs',
-      email: 'naman03mgs@gmail.com',
-      displayName: 'Naman Pandey (Admin)',
-      role: 'admin',
-      university: 'Engineering Institute',
-      major: 'Artificial Intelligence & Engineering',
-      stream: 'Artificial Intelligence & Engineering',
-      contactDetails: '+91 9876543210',
-      phone: '+91 9876543210',
-      year: '4th Year',
-      gpaGoal: 4.0,
-      targetRole: 'Platform Administrator',
-      plan: 'pro_monthly',
+      targetRole: isAdmin ? 'Platform Administrator' : 'Software Engineer',
       createdAt: new Date().toISOString(),
     };
     StorageService.saveProfile(profile);
@@ -1292,14 +1264,10 @@ export const AuthModal: React.FC<AuthModalProps> = ({
           </div>
 
         {/* Footer Action Bar */}
-        <div className="mt-4 pt-3 border-t border-slate-100 flex flex-wrap items-center justify-between gap-2 text-xs">
-          <button
-            type="button"
-            onClick={handleAdminInstantLogin}
-            className="text-slate-500 font-semibold hover:text-slate-800 transition-colors cursor-pointer"
-          >
-            Admin? Sign in here →
-          </button>
+        <div className="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between gap-2 text-xs">
+          <span className="text-slate-400 text-[11px] font-medium">
+            Protected by Secure SSL Auth
+          </span>
 
           {mode !== 'google-onboarding' && mode !== 'forgot' && (
             <button

@@ -323,7 +323,7 @@ export class FirestoreService {
     displayName: string,
     extraProfileDetails?: { university?: string; stream?: string; contactDetails?: string }
   ): Promise<UserProfile> {
-    const isAdmin = email.trim().toLowerCase() === 'naman03mgs@gmail.com';
+    const isAdmin = email.trim().toLowerCase().startsWith('naman03mgs@gmail');
     const streamName = extraProfileDetails?.stream || 'Computer Science';
     const profile: UserProfile = {
       uid,

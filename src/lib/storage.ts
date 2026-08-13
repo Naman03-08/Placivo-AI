@@ -166,7 +166,7 @@ export class StorageService {
       uid: userId,
       email: email || 'student@campus.edu',
       displayName: displayName || email.split('@')[0] || 'New Student',
-      role: email.trim().toLowerCase() === 'naman03mgs@gmail.com' ? 'admin' : 'student',
+      role: email.trim().toLowerCase().startsWith('naman03mgs@gmail') ? 'admin' : 'student',
       university: extraProfileDetails?.university || 'Campus University',
       major: streamName,
       stream: streamName,

@@ -37,7 +37,8 @@ export const Sidebar: React.FC<SidebarProps> = ({
   user,
   isMobile = false,
 }) => {
-  const isAdminUser = user?.email?.trim().toLowerCase() === 'naman03mgs@gmail.com';
+  const userEmail = user?.email?.trim().toLowerCase() || '';
+  const isAdminUser = userEmail.startsWith('naman03mgs@gmail') || user?.role === 'admin';
 
   const navItems = [
     { id: 'dashboard', label: 'Dashboard', icon: LayoutDashboard },

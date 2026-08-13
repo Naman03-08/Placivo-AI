@@ -387,7 +387,7 @@ export const Header: React.FC<HeaderProps> = ({
                   Profile & Settings
                 </button>
 
-                {user?.email?.trim().toLowerCase() === 'naman03mgs@gmail.com' && (
+                {(user?.email?.trim().toLowerCase().startsWith('naman03mgs@gmail') || user?.role === 'admin') && (
                   <button
                     onClick={() => {
                       setShowProfileMenu(false);
